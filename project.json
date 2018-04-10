@@ -1,0 +1,58 @@
+{
+  "project_type": "javascript",
+  "debugMode": 1,
+  "showFPS": false,
+
+  "frameRate": 60,
+  "noCache": false,
+  "id": "gameCanvas",
+  "renderMode": 0,
+  "engineDir": "frameworks/cocos2d-html5",
+  "modules": [
+    "cocos2d",
+    "extensions",
+    "cocostudio",
+    "spine",
+    "chipmunk",
+    "ccui",
+    "editbox"
+  ],
+  "jsList": [
+
+    "src/resource.js",
+    "src/WebResource.js",
+    "src/Engine/GUI/BaseLayer.js",
+    "src/Engine/GUI/GuiUtil.js",
+    "src/Engine/GUI/BaseLobby.js",
+    "src/Engine/GUI/BaseScene.js",
+    "src/Engine/GUI/SceneMgr.js",
+    "src/Engine/Utility/Dialog.js",
+    "src/Engine/Purchase/InappPurchase.js",
+    "src/Engine/Utility/LocalizedString.js",
+
+    "src/Engine/Utility/StringUtility.js",
+    "src/Engine/Utility/Toast.js",
+    "src/Engine/Utility/Utils.js",
+
+    "src/Engine/Social/SocialManager.js",
+    "src/Engine/Network/InPacket.js",
+    "src/Engine/Network/OutPacket.js",
+    "src/Engine/Network/WsClient.js",
+    "src/Engine/Utility/EventHandlerManager.js",
+    "src/Game/common/common.js",
+    "src/Game/common/md5.js",
+    "src/Engine/Unicorn/index.js",
+    "src/Engine/Utility/ConnectZum.js",
+
+    "src/Components/TableLayer/BaseLayerTable.js",
+    "src/Components/TableLayer/LayoutControlTableView.js",
+    "src/Components/TableLayer/LayoutListView.js",
+    "src/Components/TableLayer/LayoutTabView.js",
+
+    "src/Game/common/GameManager.js",
+    "src/Game/Alert/alert.js",
+    "src/Game/HallScene/signUp.js",
+    "src/Game/HallScene/signIn.js",
+    "src/Game/HallScene/hallscene.js"
+  ]
+}

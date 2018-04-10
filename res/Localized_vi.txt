@@ -1,0 +1,3 @@
+NOTIFY_GAME_1           = "Theo vòng @name sâm trước, mời đánh !"
+NOTIFY_GAME_2           = "Chúc mừng bạn được "@type" ,chọn tới trắng để Sâm ngay hoặc hủy báo để chơi tiếp"
+NOTIFY_GAME_3 			= "@name được đi lượt đầu tiên"

@@ -1,0 +1,2 @@
+    "src/Game/Minigame/MiniPoker/codeMiniPoker_guild.js",
+	    "src/Game/Minigame/MiniPoker/codeMiniPoker.js",

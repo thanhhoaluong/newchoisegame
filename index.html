@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Zum.Club - Cổng Game Đổi Thưởng</title>
+    <link rel="icon" type="image/GIF" href="res/favicon.ico"/>
+    <meta name="viewport" content="initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <meta id="metaKeywords" name="keywords"
+          content="game bai doi thuong, game đổi thưởng game đổi thẻ, game đánh bài đổi thưởng, chơi game đổi thưởng"/>
+    <meta id="metaDescription" name="description"
+          content="Zum.Club - Cổng chơi game online đổi thưởng uy tín. Đa dạng các thể loại game: Tài Xỉu, Slot, Cao Thấp, ... với nhiều hũ cực khủng"/>
+
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <style>
+         html {
+             -ms-touch-action: none;
+             touch-action: none;
+         }
+
+        body, canvas, div {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: #000000;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            cursor: default;
+            color: #888;
+            background-color: #000;
+            text-align: center;
+            font-family: Helvetica, Verdana, Arial, sans-serif;
+            display: flex;
+            -ms-flex-direction: column;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+
+            -webkit-box-sizing: content-box !important;
+            -moz-box-sizing: content-box !important;
+            box-sizing: content-box !important;
+        }
+
+        #Cocos2dGameContainer {
+            position: absolute;
+            margin: 0;
+            overflow: hidden;
+            left: 0;
+            top: 0;
+            display: -webkit-box;
+            -webkit-box-orient: horizontal;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+
+
+            -webkit-box-sizing: content-box !important;
+            -moz-box-sizing: content-box !important;
+            box-sizing: content-box !important;
+        }
+
+        canvas {
+            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0);
+            -webkit-box-sizing: content-box !important;
+            -moz-box-sizing: content-box !important;
+            box-sizing: content-box !important;
+        }
+    </style>
+</head>
+<body style="padding:0; margin: 0; background: #000;">
+<h1 style="display:none">Vua bài đổi thưởng tiền thật lớn nhất Việt Nam</h1>
+<script src="res/loading.js"></script>
+<canvas id="gameCanvas" width="1280" height="720"></canvas>
+<script>
+
+    ///https://semver.org/
+    var gameVersion = {
+        MAJOR : 1,
+        MINOR : 0,
+        PATCH : 1
+    }
+
+    var MODE_DEPLOY = {
+        LOCAL: 0,
+        TEST: 1,
+        LIVE: 2
+    }
+    //var CURRENT_MODE = MODE_DEPLOY.LOCAL;
+    var CURRENT_MODE = MODE_DEPLOY.TEST;
+//    var CURRENT_MODE = MODE_DEPLOY.LIVE;
+    (function () {
+        gapi.load('auth2', function () {
+            auth2 = gapi.auth2.init({
+                client_id: '158961055236-mgfhhjqmgkdpdifs1b2fl727m4c5r99v.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin'
+            });
+        });
+    })();
+
+    (function () {
+        var nav = window.navigator;
+        var ua = nav.userAgent.toLowerCase();
+        var uaResult = /android (\d+(?:\.\d+)+)/i.exec(ua) || /android (\d+(?:\.\d+)+)/i.exec(nav.platform);
+        if (uaResult) {
+            var browserCheck = ua.match(/(qzone|micromessenger|qq)(mobile)?(browser)?\/?([\d.]+)/i);
+            if (browserCheck) {
+                var browserVersion = parseFloat(browserCheck[4] || 0);
+                if (browserVer < 6.2) {
+                    var gameCanvas = document.getElementById("gameCanvas");
+                    var ctx = gameCanvas.getContext('2d');
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(0, 0, 1, 1);
+                }
+            }
+        }
+    })();
+
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1537722276311718',
+            cookie: true,
+            xfbml: true,
+            version: 'v2.7'
+        });
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                //document.getElementById('status').innerHTML = 'We are connected.';
+                // document.getElementById('login').style.visibility = 'hidden';
+            } else if (response.status === 'not_authorized') {
+                // document.getElementById('status').innerHTML = 'We are not logged in.'
+            } else {
+                //document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+            }
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script src="frameworks/cocos2d-html5/CCBoot.js"></script>
+<script cocos src="main.js"></script>
+
+</body>
+
+</html>
