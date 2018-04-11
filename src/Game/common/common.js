@@ -68,6 +68,10 @@ if(!cc.sys.isNative)
 var res_login_scene = "res/LoginScene/";
 var res_MenuSetting = "res/MenuSetting/";
 var res_SignUp = "res/SignUp/";
+var res_ListGame = "res/ListGame/";
+var res_TableGui = "res/TableGui/";
+var res_HoSo = "res/HoSo/";
+var res_Avatar = "res/Avatar/";
 
 var DON_VI_TIEN = "Zik";
 var TEN_GAME = "ZIK";
@@ -108,6 +112,19 @@ var sendRequest = function (url, params, isPost, callback, errorcallback, callba
     // xhr.open('HEAD', document.location, true);
     //xhr.send(null);
 };
+function updateMoney(moneyzo, moneyxu) {
+    if(userInfo != null){
+        if(moneyzo != null && moneyzo != undefined){
+            if(hallscene != null)
+                hallscene.lb_money_zo.setString(formatMoney(0,3,moneyzo));
+        }
+
+        if(moneyxu != null && moneyxu != undefined){
+            if(hallscene != null)
+                hallscene.lb_money_xu.setString(formatMoney(0,3,moneyxu));
+        }
+    }
+}
 
 
 function decode_base64(s) {
@@ -745,8 +762,8 @@ var RobotoRegular = {fontName: "Roboto-Regular", src: [{src: "res/Fonts/Roboto-R
 var fontRobotoBlack = {fontName: "Roboto-Black", src: [{src: "res/Fonts/Roboto-Black.ttf", type: "truetype"}]};
 var fontRobotoBold = {fontName: "Roboto-Bold", src: [{src: "res/Fonts/Roboto-Bold.ttf", type: "truetype"}]};
 var UTMBebas = {fontName: "UTM-Bebas", src: [{src: "res/Fonts/UTM-Bebas.ttf", type: "truetype"}]};
-var fontTahoma = {fontName: "tahoma", src: [{src: "res/Fonts/tahoma.ttf", type: "truetype"}]};
-var fontTahomaB = {fontName: "tahomabd", src: [{src: "res/Fonts/tahomabd.ttf", type: "truetype"}]};
+var fontTahoma = {fontName: "Tahoma", src: [{src: "res/Fonts/tahoma.ttf", type: "truetype"}]};
+var fontTahomaB = {fontName: "Tahomabd", src: [{src: "res/Fonts/tahomabd.ttf", type: "truetype"}]};
 var fontUTMAlterGothic  = {fontName: "UTM-Alter-Gothic", src: [{src: "res/Fonts/UTM-Alter-Gothic.ttf", type: "truetype"}]};
 
 var fontENGR  = {fontName: "ENGR", src: [{src: "res/Fonts/ENGR.ttf", type: "truetype"}]};

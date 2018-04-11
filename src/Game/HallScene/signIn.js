@@ -1,11 +1,45 @@
 
 
 var loginscene = null;
+var ListSlot = [
+    {
+        name: "slot1",
+        icon: res_ListGame + "slot1.png",
+    },
+    {
+        name: "slot2",
+        icon: res_ListGame + "slot2.png",
+    },
+    {
+        name: "slot3",
+        icon: res_ListGame + "slot3.png",
+    }
+];
+
+var ListMinigame = [
+    {
+        name: "mini_tx",
+        icon: res_ListGame + "mini_tx.png",
+    },
+    {
+        name: "mini_ct",
+        icon: res_ListGame + "mini_ct.png",
+    },
+    {
+        name: "mini_poker",
+        icon: res_ListGame + "mini_poker.png",
+    },
+    {
+        name: "mini_slot",
+        icon: res_ListGame + "mini_slot.png",
+    }
+];
 
 var LoginScene = BaseLayer.extend(
     {
         ctor: function () {
             this.signUp = null;
+            this.arrItemSlots = [];
             this._super();
             return true;
         },
@@ -13,6 +47,8 @@ var LoginScene = BaseLayer.extend(
             cc.log("customizeGUI");
             this.createLogin();
             this.createBottom();
+            this.createListSlot();
+            this.createListMiniGame();
         },
 
         createLogin : function(){
@@ -61,13 +97,69 @@ var LoginScene = BaseLayer.extend(
 
         },
 
+        createListSlot : function(){
+            this.createListView(this, "list_slot", cc.p(414, 335), cc.size(679,440));
+            this.list_slot.setTouchEnabled(true);
+            this.list_slot.setBounceEnabled(true);
+            this.list_slot.setClippingEnabled(true);
+            this.list_slot.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+
+            for(var i = 0; i < ListSlot.length; i ++){
+                var itemSlot = new ccui.Layout();
+                itemSlot.height = this.list_slot.height;
+                itemSlot.width = 230;
+                var bt_Slot = new ItemSlots(ListSlot[i], cc.size(215, itemSlot.height));
+                bt_Slot.setTouchEnabled(true);
+                //bt_Slot.setAudio(this.audioMenuSlots);
+                bt_Slot.setPosition(cc.p(itemSlot.width/2, itemSlot.height/2));
+                itemSlot.addChild(bt_Slot);
+                //bt_Slot.addTouchEventListener(this.onTouchListSlot, this);
+                this.list_slot.pushBackCustomItem(itemSlot);
+                this.arrItemSlots.push(bt_Slot);
+            }
+        },
+
+        createListMiniGame : function(){
+            this.createListView(this, "list_minigame", cc.p(980, 335), cc.size(434,440));
+            this.list_minigame.setTouchEnabled(true);
+            this.list_minigame.setBounceEnabled(true);
+            this.list_minigame.setClippingEnabled(true);
+            this.list_minigame.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+
+            for(var i = 0; i < ListMinigame.length; i ++){
+                if (i % 2 == 0) {
+                    var itemMiniGame = new ccui.Layout();
+                    itemMiniGame.height = this.list_minigame.height - 10;
+                    itemMiniGame.width = 220;
+                    var bt_Mini = new ItemMiniGame(ListMinigame[i], cc.size(215, itemMiniGame.height));
+                    bt_Mini.setTouchEnabled(true);
+                    bt_Mini.setPosition(cc.p(itemMiniGame.width/2, 3/4*itemMiniGame.height));
+                    itemMiniGame.addChild(bt_Mini);
+                    //bt_Slot.addTouchEventListener(this.onTouchListMiniGame, this);
+                    this.arrItemSlots.push(bt_Mini);
+
+                    if (i < ListMinigame.length - 1) {
+                        var bt_Mini = new ItemMiniGame(ListMinigame[i + 1], cc.size(215, itemMiniGame.height));
+                        bt_Mini.setTouchEnabled(true);
+                        bt_Mini.setPosition(cc.p(itemMiniGame.width/2, 1/4*itemMiniGame.height - 5));
+                        itemMiniGame.addChild(bt_Mini);
+                        //bt_Slot.addTouchEventListener(this.onTouchListMiniGame, this);
+                        this.arrItemSlots.push(bt_Mini);
+                    }
+                    this.list_minigame.pushBackCustomItem(itemMiniGame);
+                }
+            }
+        },
+
         onButtonRelease: function (button, id) {
             switch (id) {
                 case LoginScene.BTN_REGISTER:
                     this.addRegisterScene();
                     break;
                 case LoginScene.BTN_SIGN_IN:
-                    showAlam(0, "Vui lòng đăng nhập vào hệ thống", null);
+                    //showAlam(0, "Vui lòng đăng nhập vào hệ thống", null);
+                    intoHallScene();
+                    this.SignIn.setVisible(false);
                     break;
             }
         },

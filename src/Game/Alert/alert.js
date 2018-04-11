@@ -25,10 +25,10 @@ var ShowAlert = BaseLayer.extend(
             this.lb_content.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_content.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
-            this.createButton(this.ShowAlert,"bt_ok",ShowAlert.BTN_OK,cc.p(883,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.ShowAlert,"bt_ok",ShowAlert.BTN_OK,cc.p(893,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
             this.createText(this.bt_ok, "lb_ok", cc.p(this.bt_ok.width/2, this.bt_ok.height/2), "ĐỒNG Ý", fontTahomaB.fontName, 25);
 
-            this.createButton(this.ShowAlert,"bt_cancel",ShowAlert.BTN_CANCEL,cc.p(610,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.ShowAlert,"bt_cancel",ShowAlert.BTN_CANCEL,cc.p(620,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
             this.createText(this.bt_cancel, "lb_cancel", cc.p(this.bt_cancel.width/2, this.bt_cancel.height/2), "THOÁT", fontTahomaB.fontName, 25);
 
             this.bt_ok.setScaleX(0.7);
@@ -51,7 +51,7 @@ var ShowAlert = BaseLayer.extend(
                     this.destroyAlam();
                     break;
                 case ShowAlert.BTN_OK:
-                    this.callbackOK;
+                    this.callbackOK();
                     this.destroyAlam();
                     break;
                 case ShowAlert.BTN_CANCEL:

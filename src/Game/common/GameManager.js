@@ -12,7 +12,8 @@ var userInfo = {
     _isSignIned : false,
     Info:{
         sessionKey : "",
-        nickname:"",
+        nickname:"muahong909",
+        id:"1102332",
         zoMoney:0,
         xuMoney:0,
         vippoint:0,
@@ -27,3 +28,5 @@ var userInfo = {
 }
 
 var configGame = [];
+var color_zo = cc.color("#edd31f");
+var color_xu = cc.color("#e5e5e5");

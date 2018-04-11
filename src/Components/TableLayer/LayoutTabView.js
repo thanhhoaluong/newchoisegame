@@ -1,6 +1,3 @@
-/**
- * Created by PVC on 7/19/2017.
- */
 var LayoutTabView = ccui.Layout.extend(
     {
         _layer:null,
@@ -16,7 +13,7 @@ var LayoutTabView = ccui.Layout.extend(
             this.setContentSize(this._size);
             //var w = this._size.width/this._arrTitleTab.length;
             var w = 175;
-            var sizeTab = cc.size(parseFloat(w),this._size.height);
+            var sizeTab = cc.size(this._size.width/(arrTitleTab.length),this._size.height);
             var indexFocus1 = 0;
             if(indexFocus)
             {
@@ -33,40 +30,41 @@ var LayoutTabView = ccui.Layout.extend(
                 btnTab.setTag(i);
                 btnTab.setTitleFontName(fontArialB.fontName);
                 btnTab.setTitleFontSize(20);
-                btnTab.setTitleText(this._arrTitleTab[i]);
+                //btnTab.setTitleText(this._arrTitleTab[i]);
                 //btnTab.setTitleColor(GuiUtil.color("#d8daf3"));
                 btnTab.getTitleRenderer().setColor(GuiUtil.color("#d8daf3"));
                 var texType = ccui.Widget.LOCAL_TEXTURE;
-                if (cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/btn_thanhdu.png")) {
+                if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bt_title_1.png")) {
                     texType = ccui.Widget.PLIST_TEXTURE;
                 }
                 if(i == 0)
                 {
-                    btnTab.loadTextures("res/Minigame/ImageChung/btn_thanhdu.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", texType);
-                    btnTab.normalFileName = "res/Minigame/ImageChung/btn_thanhdu.png";
-                    btnTab.clickedFileName = "res/Minigame/ImageChung/btn_thanhdu_s.png";
+                    btnTab.loadTextures(res_TableGui + "bt_title_1.png", res_TableGui + "bt_title_1_s.png", res_TableGui + "bt_title_1_s.png", texType);
+                    btnTab.normalFileName = res_TableGui + "bt_title_1.png";
+                    btnTab.clickedFileName = res_TableGui + "bt_title_1_s.png";
                     btnTab.isSelected = false;
                 }else if(i == this._arrTitleTab.length - 1)
                 {
-                    btnTab.loadTextures("res/Minigame/ImageChung/btn_thanhdu.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", texType);
+                    btnTab.loadTextures(res_TableGui + "bt_title_1.png", res_TableGui + "bt_title_1_s.png", res_TableGui + "bt_title_1_s.png", texType);
+                    btnTab.setScaleX(-1);
                     //btnTab.setRotation(180);
                     //btnTab.getTitleRenderer().setRotation(180);
                     //btnTab._titleRenderer.setRotation(180);
 
-                    btnTab.normalFileName = "res/Minigame/ImageChung/btn_thanhdu.png";
-                    btnTab.clickedFileName = "res/Minigame/ImageChung/btn_thanhdu_s.png";
+                    btnTab.normalFileName = res_TableGui + "bt_title_1.png";
+                    btnTab.clickedFileName = res_TableGui + "bt_title_1_s.png";
                     btnTab.isSelected = false;
                 }else
                 {
-                    btnTab.loadTextures("res/Minigame/ImageChung/btn_thanhdu.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", "res/Minigame/ImageChung/btn_thanhdu_s.png", texType);
-                    btnTab.normalFileName = "res/Minigame/ImageChung/btn_thanhdu.png";
-                    btnTab.clickedFileName = "res/Minigame/ImageChung/btn_thanhdu_s.png";
+                    btnTab.loadTextures(res_TableGui + "bt_title_mid.png", res_TableGui + "bt_title_mid_s.png", res_TableGui + "bt_title_mid_s.png", texType);
+                    btnTab.normalFileName = res_TableGui + "bt_title_mid.png";
+                    btnTab.clickedFileName = res_TableGui + "bt_title_mid_s.png";
                     btnTab.isSelected = false;
                 }
                 if(i == indexFocus1)
                 {
                     var texType = ccui.Widget.LOCAL_TEXTURE;
-                    if (cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/btn_thanhdu.png")) {
+                    if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bt_title_mid_s.png")) {
                         texType = ccui.Widget.PLIST_TEXTURE;
                     }
                     btnTab.isSelected = true;
@@ -80,13 +78,19 @@ var LayoutTabView = ccui.Layout.extend(
                     btnTab.setTitleFontName("res/Font/" + btnTab.getTitleFontName() + ".ttf");
                 }
                 this.addChild(btnTab);
+
+                var _sp = new cc.Sprite(res_TableGui + this._arrTitleTab[i] + ".png");
+                _sp.setPosition(cc.p(btnTab.width/2, btnTab.height/2));
+                if(i == this._arrTitleTab.length - 1)
+                    _sp.setScaleX(-1);
+                btnTab.addChild(_sp)
             }
         },
 
         setIndexTabFocus:function(index)
         {
             var texType = ccui.Widget.LOCAL_TEXTURE;
-            if (cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/btn_thanhdu.png")) {
+            if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bt_title_mid.png")) {
                 texType = ccui.Widget.PLIST_TEXTURE;
             }
             for(var i = 0; i < this._arrTitleTab.length; i++){
@@ -108,7 +112,7 @@ var LayoutTabView = ccui.Layout.extend(
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
                     var texType = ccui.Widget.LOCAL_TEXTURE;
-                    if (cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/btn_thanhdu.png")) {
+                    if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bt_title_mid.png")) {
                         texType = ccui.Widget.PLIST_TEXTURE;
                     }
                     for(var i = 0; i < this._arrTitleTab.length; i++)

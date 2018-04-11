@@ -17,38 +17,27 @@ var BaseLayerTable = BaseLayer.extend(
         ctor: function (){
 
             this._super();
-            cc.spriteFrameCache.addSpriteFrames("res/Minigame/ImageChung/PlistImageChung.plist");
-
-            this.commonImagePath = "res/Minigame/ImageChung/";
-            this._moneyType = MONEY_XU;
-            this._size = cc.size(1148,692);
+            //cc.spriteFrameCache.addSpriteFrames("res/Minigame/ImageChung/PlistImageChung.plist");
+            this._size = cc.size(1103,642);
             this._titleText = "";
-            this.addLayout(this,"_bgLayer",cc.p(640,360),null,cc.size(1920,1280),true);
+            this.createLayout(this,"_bgLayer",cc.p(640,360),null,cc.size(1920,1280),true);
             this._bgLayer.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
             this._bgLayer.setBackGroundColor(cc.color.BLACK);
-            this._bgLayer.setBackGroundColorOpacity(200);
+            this._bgLayer.setBackGroundColorOpacity(150);
             this._bgLayer.setTag(BaseLayerTable.BTN_EXIT);
             this._bgLayer.addTouchEventListener(this.onTouchEventHandler, this);
 
-            this.addImage(this,"_bgImage",cc.p(640,360),res_Lobby + "/bground_tab.png",this._size);
-            //this.addImage(this,"new",cc.p(640,360),res_Lobby + "/bground_tab.png",cc.size(1148,692));
-            //this.addSpriteStructureWithoutResourcePath(layout, "bg_tab_menu", cc.p(640, 360.41), res_Lobby + "/bground_tab.png");
+            this.createImage(this,"_bgImage",cc.p(640,360),res_TableGui + "bg_table.png",this._size);
             this._bgImage.setTouchEnabled(true);
             var positionY = 360 + this._size.height/2 - 26;
-            //this.addImage(this,"_bgcontent",cc.p(640,314),res_Lobby + "/bg_content.png",cc.size(1037,489));
-            this.addImage(this,"_title",cc.p(640,658),res_Lobby + "/titile.png",cc.size(414,57));
-            //this.addSpriteStructureWithoutResourcePath(layout, "bg_content", cc.p(640, 310), res_Lobby + "/bg_content.png");
 
-            this.addText(this,"_lbTitle",cc.p(640,658),this._titleText,fontArialB.fontName,35);
-            this._lbTitle.setColor(cc.color(154,92,47));
-            //positionY = 360 + this._size.height/2 - 35;
-            //var positionX = 640 + this._size.width/2 - 39;
+
             positionY = 639;
             var positionX = 1140;
             this._btnExit = new ccui.Button();
             var texType = ccui.Widget.LOCAL_TEXTURE;
-            texType =(cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/btn_close_allbang.png") || texType == ccui.Widget.PLIST_TEXTURE) ? ccui.Widget.PLIST_TEXTURE : ccui.Widget.LOCAL_TEXTURE;
-            this._btnExit.loadTextures(res_Lobby + "/btnClose.png", res_Lobby + "/btnClose_s.png", res_Lobby + "/btnClose_s.png", texType);
+            texType =(cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bg_table.png") || texType == ccui.Widget.PLIST_TEXTURE) ? ccui.Widget.PLIST_TEXTURE : ccui.Widget.LOCAL_TEXTURE;
+            this._btnExit.loadTextures(res_SignUp + "b_close.png", res_SignUp + "b_close.png", res_SignUp + "b_close.png", texType);
             this._btnExit.setPosition(cc.p(positionX,positionY));
             this.addChild(this._btnExit);
             this._btnExit.setPressedActionEnabled(true);
