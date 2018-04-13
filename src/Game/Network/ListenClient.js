@@ -1,4 +1,4 @@
-var countOnConect = 3;
+var countConnect = 3;
 
 var GameListener = cc.Class.extend(
     {
@@ -7,19 +7,19 @@ var GameListener = cc.Class.extend(
             this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
         },
         onFinishConnect: function (isSuccess) {
-             cc.log("MinigameListener Finish connect Minigame" + isSuccess);
+             cc.log("Connect Socket " + isSuccess);
             conectSocketClient = isSuccess;
             if (isSuccess) {
                 loginscene.conectsocket.clearReconnectSocket();
                 this.gameWsState = CLIENT_STATE.CONNECTED;
             } else {
                 this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
-                showAlam(0, "Không th? k?t n?i ??n máy ch?! Vui lòng th? l?i sau", null);
+                showAlam(0, "Không th? k?t n?i máy ch?! Vui lòng th? l?i sau.", null);
 
             }
         },
         onDisconnected: function () {
-             cc.log(" Finish connect socket" );
+             cc.log(" Disconnect connect socket" );
             conectSocketClient = false;
 
             this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
