@@ -2,16 +2,16 @@
  * Created by Admin on 4/12/2017.
  */
 
-var ConnectNative = function () {
+var clientBridge = function () {
 }
 
-ConnectNative.VIETNAM_CODE = 452;
-ConnectNative.VIETTEL = "04";
-ConnectNative.MOBIFONE = "01";
-ConnectNative.VINAPHONE = "02";
-ConnectNative.VIETNAMMOBLE = "05";
-ConnectNative.BEELINE = "07";
-ConnectNative.countryCode = function(){
+clientBridge.VIETNAM_CODE = 452;
+clientBridge.VIETTEL = "04";
+clientBridge.MOBIFONE = "01";
+clientBridge.VINAPHONE = "02";
+clientBridge.VIETNAMMOBLE = "05";
+clientBridge.BEELINE = "07";
+clientBridge.countryCode = function(){
     var ret = "";
 
     if (cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative)
@@ -21,7 +21,7 @@ ConnectNative.countryCode = function(){
     return ret;
 }
 
-ConnectNative.networkCode = function(){
+clientBridge.networkCode = function(){
     var ret = "";
 
     if (cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative)
@@ -31,7 +31,7 @@ ConnectNative.networkCode = function(){
     return ret;
 }
 
-ConnectNative.versionCode = function () {
+clientBridge.versionCode = function () {
     var ret = "1";
     if (cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative)
         ret = jsb.reflection.callStaticMethod(toName("ieg%|zf%~cfy%PZ@DC"), "getVersionCode", toName("\"#F`k|k%fkdm%Y~xcdm1"));
@@ -40,8 +40,8 @@ ConnectNative.versionCode = function () {
     return ret;
 }
 
-ConnectNative.openWebView = function (url, https) {
-    cc.log("ConnectNative.openWebView " + url);
+clientBridge.openWebView = function (url, https) {
+    cc.log("clientBridge.openWebView " + url);
     if (!https) {
         url = url.replace("https", "http");
     }
@@ -59,8 +59,8 @@ ConnectNative.openWebView = function (url, https) {
     }
 }
 
-ConnectNative.sendSMS = function (phone, content) {
-    cc.log("ConnectNative.sendSMS : " + phone + "/" + content);
+clientBridge.sendSMS = function (phone, content) {
+    cc.log("clientBridge.sendSMS : " + phone + "/" + content);
 
     if (cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative) {
         jsb.reflection.callStaticMethod(toName("ieg%|zf%~cfy%PZ@DC"), toName("yodnGoyykmo"), toName("\"F`k|k%fkdm%Y~xcdm1F`k|k%fkdm%Y~xcdm1#\\"), phone, content);
@@ -69,7 +69,7 @@ ConnectNative.sendSMS = function (phone, content) {
         jsb.reflection.callStaticMethod(toName("Eh`IHxcnmfo"), toName("yodnGoyykmo0goyykmo0"), phone + "",content + "");
     }
 }
-ConnectNative.GetDeviceInfo = function()
+clientBridge.GetDeviceInfo = function()
 {
     var ret = "";
     if(cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative){
@@ -79,7 +79,7 @@ ConnectNative.GetDeviceInfo = function()
         ret = jsb.reflection.callStaticMethod(toName("Eh`IHxcnmfo"), toName("mo~No|cioCdle"));
     return ret;
 }
-ConnectNative.GetDeviceID = function()
+clientBridge.GetDeviceID = function()
 {
     var ret = "";
     if(cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative){
@@ -89,7 +89,7 @@ ConnectNative.GetDeviceID = function()
         ret = jsb.reflection.callStaticMethod(toName("Eh`IHxcnmfo"), toName("mo~CGOC"));
     return ret;
 }
-ConnectNative.GetVersionOS = function()
+clientBridge.GetVersionOS = function()
 {
     var ret = "";
     if(cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative){
@@ -99,7 +99,7 @@ ConnectNative.GetVersionOS = function()
         ret = jsb.reflection.callStaticMethod(toName("Eh`IHxcnmfo"), toName("mo~Ey\\oxyced"));
     return ret;
 }
-ConnectNative.GetDeviceModel = function()
+clientBridge.GetDeviceModel = function()
 {
     var ret = "";
     if(cc.sys.os == cc.sys.OS_ANDROID && cc.sys.isNative){
@@ -985,6 +985,7 @@ ConnectState.CONNECTED = 2;
 ConnectState.NEED_QUIT = 3;             // state khi client da disconnect va thong bao cho GUI hien tai de disconnect
 
 var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
+//var WebSocket = window.MozWebSocket;
 
 var EVENT_CONNECT_SUCCESS = 0;
 var EVENT_CONNECT_ERROR = 3;
@@ -1061,26 +1062,18 @@ var WebsocketClient = cc.Class.extend({
         }
     },
 
-    connect: function(host,port,isSsl, listenner)
-    {
-        // cc.log("connect: " + host + " port: " + port);
-        if(!useTCP){
-            if(port % 2 == 1){
-                port = port + 1;
-            }
-        }
-        if (isSsl) {
-            port = port + 1;
-        }
-        // cc.log("create websocket client begin");
-        this.ws = new WebSocket("ws" + (isSsl ? "s" : "") + "://" + host + ":" + port + "/websocket");
-        this.listener = listenner;
-        this.ws.binaryType = "arraybuffer";
-        this.ws.onopen = this.onSocketConnect.bind(this);
-        this.ws.onclose = this.onSocketClose.bind(this);
-        this.ws.onmessage = this.onSocketData.bind(this);
-        this.ws.onerror = this.onSocketError.bind(this);
-        // cc.log("create websocket client emd");
+    connect: function(host,port,isSsl, listenner)    {
+        //cc.log("connect: " + host + " port: " + port);
+        var url = "ws" + (isSsl ? "s" : "") + "://" + host + ":" + port + "/ws";
+
+            this.ws = new WebSocket(url);
+            this.listener = listenner;
+            this.ws.binaryType = "arraybuffer";
+            this.ws.onopen = this.onSocketConnect.bind(this);
+            this.ws.onclose = this.onSocketClose.bind(this);
+            this.ws.onmessage = this.onSocketData.bind(this);
+            this.ws.onerror = this.onSocketError.bind(this);
+            //cc.log("create websocket client emd");
     },
 
     closeSocket:function()
@@ -1120,6 +1113,8 @@ var WebsocketClient = cc.Class.extend({
         }
     },
     onSocketData: function(a){
+        //cc.log("onSocketData = " + a.data);
+
         var data = new Uint8Array(a.data);
         if(false) {
             this.data.push(data);
@@ -1127,7 +1122,7 @@ var WebsocketClient = cc.Class.extend({
             if(this.listener && this.listener.onReceived)
             {
 
-                this.listener.onReceived.call(this.listener,0,data);
+                this.listener.onReceived.call(this.listener,a.data);
             }
         }
     },
@@ -1144,6 +1139,8 @@ var WebsocketClient = cc.Class.extend({
         }
     },
     send: function(packet){
+        this.ws.send(packet);
+        return;
         if(!cc.sys.isNative || !useTCP){
             var data = new Int8Array(packet._length);
 

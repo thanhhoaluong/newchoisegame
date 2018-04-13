@@ -77,13 +77,13 @@ var HoSoCaNhan = BaseLayer.extend(
             this.lb_id.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_id.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 
-            this.createText(this.HoSoCaNhan, "lb_money_zo", cc.p(800, 346), userInfo.Info.zoMoney + " Zo", fontTahoma.fontName, 21);
+            this.createText(this.HoSoCaNhan, "lb_money_zo", cc.p(800, 346), userInfo.Info.zoMoney + " " + DON_VI_TIEN_THAT, fontTahoma.fontName, 21);
             this.lb_money_zo.ignoreContentAdaptWithSize(false);
             this.lb_money_zo.setContentSize(cc.size(200, 26));
             this.lb_money_zo.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_money_zo.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 
-            this.createText(this.HoSoCaNhan, "lb_money_xu", cc.p(800, 292), userInfo.Info.xuMoney + " Xu", fontTahoma.fontName, 21);
+            this.createText(this.HoSoCaNhan, "lb_money_xu", cc.p(800, 292), userInfo.Info.xuMoney + " " + DON_VI_TIEN_TANG, fontTahoma.fontName, 21);
             this.lb_money_xu.ignoreContentAdaptWithSize(false);
             this.lb_money_xu.setContentSize(cc.size(200, 26));
             this.lb_money_xu.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);

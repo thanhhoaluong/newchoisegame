@@ -28,7 +28,7 @@ var HallScene = BaseLayer.extend(
             this.createImage(this.top_menu, "bg_money_zo", cc.p(545, posy), res_MenuSetting + "Top/bg_coin.png", cc.size(246, 57));
             this.createImage(this.top_menu, "bg_money_xu", cc.p(817, posy), res_MenuSetting + "Top/bg_xu.png", cc.size(245, 57));
 
-            this.createText(this.top_menu, "lb_money_zo", cc.p(545, posy), "", fontTahoma.fontName, 20);
+            this.createText(this.top_menu, "lb_money_zo", cc.p(545, posy), formatMoney(0,3,userInfo.Info.zoMoney), fontTahoma.fontName, 20);
             this.lb_money_zo.ignoreContentAdaptWithSize(false);
             this.lb_money_zo.setContentSize(cc.size(160, 30));
             this.lb_money_zo.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
@@ -36,7 +36,7 @@ var HallScene = BaseLayer.extend(
             this.lb_money_zo.setColor(color_zo);
 
 
-            this.createText(this.top_menu, "lb_money_xu", cc.p(817, posy), "", fontTahoma.fontName, 20);
+            this.createText(this.top_menu, "lb_money_xu", cc.p(817, posy), formatMoney(0,3,userInfo.Info.xuMoney), fontTahoma.fontName, 20);
             this.lb_money_xu.ignoreContentAdaptWithSize(false);
             this.lb_money_xu.setContentSize(cc.size(160, 30));
             this.lb_money_xu.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);

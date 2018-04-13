@@ -42,7 +42,7 @@
     "src/Game/common/common.js",
     "src/Game/common/md5.js",
     "src/Engine/Unicorn/index.js",
-    "src/Engine/Utility/ConnectZum.js",
+    "src/Engine/Utility/ClientBridge.js",
 
     "src/Components/TableLayer/BaseLayerTable.js",
     "src/Components/TableLayer/LayoutControlTableView.js",
@@ -50,11 +50,15 @@
     "src/Components/TableLayer/LayoutTabView.js",
 
     "src/Game/common/GameManager.js",
+    "src/Game/Network/ListenClient.js",
+    "src/Game/Network/gameWebSocketClient.js",
+    "src/Game/Network/ResponsePortal.js",
     "src/Game/Alert/alert.js",
     "src/Game/HallScene/signUp.js",
     "src/Game/HallScene/ItemSlot.js",
     "src/Game/HallScene/signIn.js",
     "src/Game/HallScene/hallscene.js",
+    "src/Game/HallScene/conectSocketClient.js",
 
     "src/Game/Information/player_info.js",
     "src/Game/Information/hosocanhan.js"

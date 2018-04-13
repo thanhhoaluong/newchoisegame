@@ -40,15 +40,30 @@ var LoginScene = BaseLayer.extend(
         ctor: function () {
             this.signUp = null;
             this.arrItemSlots = [];
+            this.conectsocket = null;
+            this.platform = null;
             this._super();
             return true;
         },
         customizeGUI: function () {
             cc.log("customizeGUI");
+            if (cc.sys.isNative) {
+                if(cc.sys.os == cc.sys.OS_ANDROID) {
+                    this.platform = "ad";
+                }else if(cc.sys.os == cc.sys.OS_IOS) {
+                    this.platform = "ios";
+                }else if(cc.sys.os == cc.sys.OS_WINRT) {
+                    this.platform = "wp";
+                }
+            }else{
+                this.platform = "web";
+            }
+
             this.createLogin();
             this.createBottom();
             this.createListSlot();
             this.createListMiniGame();
+            this.connectSocketClient();
         },
 
         createLogin : function(){
@@ -73,6 +88,8 @@ var LoginScene = BaseLayer.extend(
             this.createButton(this.SignIn,"bt_sign_gg",LoginScene.BTN_SIGN_IN_GG,cc.p(1005,678),true,res_login_scene + "lg_gg.png",res_login_scene + "lg_gg.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.SignIn,"bt_for_pass",LoginScene.BTN_FOR_PASS,cc.p(1126,678),true,res_login_scene + "btn_get_pass.png",res_login_scene + "btn_get_pass.png",ccui.Widget.PLIST_TEXTURE);
 
+            this.ed_username_sign.setString("gamegame");
+            this.ed_pass_sign.setString("game123");
         },
 
         createBottom : function(){
@@ -157,17 +174,62 @@ var LoginScene = BaseLayer.extend(
                     this.addRegisterScene();
                     break;
                 case LoginScene.BTN_SIGN_IN:
-                    //showAlam(0, "Vui lòng đăng nhập vào hệ thống", null);
-                    intoHallScene();
-                    this.SignIn.setVisible(false);
+                    this.callLogin();
                     break;
             }
+        },
+
+        callLogin : function(){
+            var user = this.ed_username_sign.getString();
+            var pass = this.ed_pass_sign.getString();
+
+            if (user == null || user.length < 6) {
+                showAlam(0, "Bạn chưa nhập tên đăng nhập hoặc sai tên đăng nhập!", null);
+                return;
+            }
+            if (pass == null || pass.length < 6) {
+                showAlam(0, "Bạn chưa nhập mật khẩu hoặc nhập sai mật khẩu!", null);
+                return;
+            }
+
+            this.conectsocket.loginToGame(user, pass, this.platform);
+        },
+
+        LoginSuccess : function(info, error){
+            cc.log("info = " + info.Id);
+            // update thong tin player
+            if(error != ""){
+                showAlam(0, error, null);
+                return;
+            }
+
+            userInfo.userName = info.Name;
+            var pass = this.ed_pass_sign.getString();
+            userInfo.passWord = pass;
+            this.ed_username_sign.setString("");
+            this.ed_pass_sign.setString("");
+
+            userInfo.Info.nickname = info.Alias;
+            userInfo.Info.accessToken = info.Token;
+            userInfo.Info.zoMoney = info.Coin;
+            userInfo.Info.xuMoney = info.Gold;
+
+
+            intoHallScene();
+            this.SignIn.setVisible(false);
         },
 
         addRegisterScene : function(){
             if(this.signUp == null){
                 this.signUp = new SignUp(this)
                 this.addChild(this.signUp);
+            }
+        },
+
+        connectSocketClient : function(){
+            if(this.conectsocket == null){
+                this.conectsocket = new ConectSocketClient(this)
+                this.addChild(this.conectsocket);
             }
         },
 

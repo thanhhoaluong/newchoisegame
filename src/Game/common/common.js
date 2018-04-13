@@ -1,6 +1,8 @@
-/**
- * Created by Admin on 8/2/2016.
- */
+var CLIENT_STATE = {
+    NOT_CONNECTED : 0,
+    CONNECTING: 1,
+    CONNECTED: 2
+};
 
 
 var version_res = 1;
@@ -73,7 +75,8 @@ var res_TableGui = "res/TableGui/";
 var res_HoSo = "res/HoSo/";
 var res_Avatar = "res/Avatar/";
 
-var DON_VI_TIEN = "Zik";
+var DON_VI_TIEN_THAT = "Zo";
+var DON_VI_TIEN_TANG = "Xu";
 var TEN_GAME = "ZIK";
 var Type_Web = browserName();
 
