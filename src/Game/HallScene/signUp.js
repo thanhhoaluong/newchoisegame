@@ -52,9 +52,10 @@ var SignUp = BaseLayer.extend(
                 this.ed_captcha.nextTabFocus = this.ed_username_reg;
             }
 
-            this.createButton(this.SignUp,"bt_refresh",SignUp.BTN_REFRESH,cc.p(950,284),true,res_SignUp + "b_refresh.png",res_SignUp + "b_refresh.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.SignUp,"bt_refresh",SignUp.BTN_REFRESH,cc.p(960,284),true,res_SignUp + "b_refresh.png",res_SignUp + "b_refresh.png",ccui.Widget.PLIST_TEXTURE);
 
-            this.createImage(this.SignUp, "sp_ckb_reg", cc.p(770,237), res_SignUp + "tx_dksd.png", cc.size(331, 21));
+            this.createImage(this.SignUp, "sp_ckb_reg", cc.p(760,237), res_SignUp + "tx_dksd.png", cc.size(331, 21));
+            this.createButton(this.SignUp,"bt_read",SignUp.BTN_READ,cc.p(960,237),true,res_SignUp + "ic_read.png",res_SignUp + "ic_read.png",ccui.Widget.PLIST_TEXTURE);
             this.createCheckBox(this.SignUp, "ckb_reg", cc.p(562, 237), true, res_SignUp + "/ck.png", res_SignUp + "/ck.png", res_SignUp + "/cked.png", res_SignUp + "/ck.png", res_SignUp + "/cked.png");
 
             this.createButton(this.SignUp,"bt_create_acc",SignUp.BTN_CREATE,cc.p(735,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
@@ -166,4 +167,5 @@ var SignUp = BaseLayer.extend(
 SignUp.CLOSE = 1;
 SignUp.BTN_REFRESH = 2;
 SignUp.BTN_CREATE = 3;
+SignUp.BTN_READ = 4;
 
