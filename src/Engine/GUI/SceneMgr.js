@@ -288,7 +288,7 @@ var Loading = cc.Layer.extend({
         this.addChild(pn_layout);
 
         pn_layout.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
-        pn_layout.setBackGroundColor(GuiUtil.color("#000000"));
+        pn_layout.setBackGroundColor(GuiUtility.color("#000000"));
         pn_layout.setBackGroundColorOpacity(180);
         // cc.log("onEnter0");
         //test

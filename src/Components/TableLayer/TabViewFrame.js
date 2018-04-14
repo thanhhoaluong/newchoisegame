@@ -1,4 +1,4 @@
-var LayoutTabView = ccui.Layout.extend(
+var TabViewFrame = ccui.Layout.extend(
     {
         _layer:null,
         _arrTitleTab: null,
@@ -32,7 +32,7 @@ var LayoutTabView = ccui.Layout.extend(
                 btnTab.setTitleFontSize(20);
                 //btnTab.setTitleText(this._arrTitleTab[i]);
                 //btnTab.setTitleColor(GuiUtil.color("#d8daf3"));
-                btnTab.getTitleRenderer().setColor(GuiUtil.color("#d8daf3"));
+                btnTab.getTitleRenderer().setColor(GuiUtility.color("#d8daf3"));
                 var texType = ccui.Widget.LOCAL_TEXTURE;
                 if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "bt_title_1.png")) {
                     texType = ccui.Widget.PLIST_TEXTURE;
@@ -69,7 +69,7 @@ var LayoutTabView = ccui.Layout.extend(
                     }
                     btnTab.isSelected = true;
                     btnTab.loadTextureNormal(btnTab.clickedFileName,texType);
-                    btnTab.getTitleRenderer().setColor(GuiUtil.color("#344265"));
+                    btnTab.getTitleRenderer().setColor(GuiUtility.color("#344265"));
                 }
                 btnTab.addTouchEventListener(this.onTouchEventHandler, this);
                 btnTab.setPosition(cc.p(sizeTab.width/2 + i * sizeTab.width, sizeTab.height/2-2));
@@ -125,12 +125,12 @@ var LayoutTabView = ccui.Layout.extend(
                             }
                             this.getChildByTag(i).loadTextureNormal(this.getChildByTag(i).clickedFileName,texType);
                             //this.getChildByTag(i).setTitleColor(GuiUtil.color("#344265"));
-                            this.getChildByTag(i).getTitleRenderer().setColor(GuiUtil.color("#344265"));
+                            this.getChildByTag(i).getTitleRenderer().setColor(GuiUtility.color("#344265"));
                             this.getChildByTag(i).isSelected = true;
                             this._layer.onClickTab(this._tabIndex, sender.getTag());
                         }else
                         {
-                            this.getChildByTag(i).getTitleRenderer().setColor(GuiUtil.color("#d8daf3"));
+                            this.getChildByTag(i).getTitleRenderer().setColor(GuiUtility.color("#d8daf3"));
                             if(this.getChildByTag(i).isSelected)
                             {
                                 this.getChildByTag(i).isSelected = false;

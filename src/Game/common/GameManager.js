@@ -23,7 +23,10 @@ var userInfo = {
         accessToken:"",
         avatar:1,
         email : "",
-        mobile:"",
+        mobile:"0904494654",
+        sercurity:0,
+        minZoLogin:0,
+        zoInBox:0,
     },
 }
 

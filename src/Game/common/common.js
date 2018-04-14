@@ -496,16 +496,17 @@ formartDateTimeCompact = function (date) {
 
     return str;
 }
-// cc.view.setResizeCallback(function() {
-//     //cc.log("cc.game.onStart" + cc.view.getFrameSize().width + " " + cc.view.getFrameSize().height);
-//    // cc.log("Resize");
-//    //  if(GameScene!=null)
-//    //  {
-//    //      //winSizeWeb();
-//    //  }
-//
-// });
-//
+
+var MahoaNoiDung = function (value) {
+    var str = value.substr((value.length - 3), value.length);
+    var str1 = value.substr(0, (value.length - 3));
+    var mahoa = "";
+    for (var i = 0; i < str1.length; i++) {
+        mahoa = mahoa + "*";
+    }
+    var noidung = mahoa + "" + str;
+    return noidung;
+};
 
 function browserName(){
     if(cc.sys.isNative)
@@ -562,99 +563,6 @@ function checkUpdateManifest(_am, sender) {
     }
 
 }
-
-/*function updateManifest(_am, uiTimer, callBack, callBackErro, sender) {
- if(!cc.sys.isNative)
- {
- return;
- }
- uiTimer.setPercentage(0);
-
-
- if (!_am.getLocalManifest().isLoaded())
- {
- cc.log("Fail to update assets, step skipped.");
- callBackErro("Fail to update assets, step skipped.");
- //_am.release();
- }
- else
- {
- var __failCount = 0;
- var fileCount = 0;
- var listener = new jsb.EventListenerAssetsManager(_am, function(event) {
- cc.log("event.getEventCode() Update " + event.getEventCode());
- switch (event.getEventCode())
- {
- case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
- cc.log("No local manifest file found, skip assets update.");
- callBackErro("No local manifest file found, skip assets update.");
- //cc.eventManager.removeListener(listener);
- //_am.release();
- break;
- case jsb.EventAssetsManager.UPDATE_PROGRESSION:
-
-
- cc.log("getPercent " + event.getPercent());
- cc.log("getPercentByFile " + event.getPercentByFile());
- uiTimer.setPercentage(event.getPercentByFile());
-
- var msg = event.getMessage();
- if (msg) {
- cc.log(msg);
- }
-
- fileCount ++;
- cc.log("fileCount " + fileCount);
- break;
- case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
- case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
- cc.log("Fail to download manifest file, update skipped.");
- callBackErro("Fail to download manifest file, update skipped.");
- //cc.eventManager.removeListener(listener);
- //_am.release();
- break;
- case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
- case jsb.EventAssetsManager.UPDATE_FINISHED:
- cc.log("Update finished. " + event.getMessage());
-
- callBack();
- //cc.eventManager.removeListener(listener);
- //_am.release();
- break;
- case jsb.EventAssetsManager.UPDATE_FAILED:
- cc.log("Update failed. " + event.getMessage());
-
- __failCount ++;
- if (__failCount < 5)
- {
- _am.downloadFailedAssets();
- }
- else
- {
- cc.log("Reach maximum fail count, exit update process");
- __failCount = 0;
- //scene = new AssetsManagerTestScene(backgroundPaths[currentScene]);
- //cc.director.runScene(scene);
- callBackErro("Reach maximum fail count, exit update process");
- //cc.eventManager.removeListener(listener);
- //_am.release();
- }
- break;
- case jsb.EventAssetsManager.ERROR_UPDATING:
- cc.log("Asset update error: " + event.getAssetId() + ", " + event.getMessage());
- break;
- case jsb.EventAssetsManager.ERROR_DECOMPRESS:
- cc.log(event.getMessage());
- break;
- default:
- break;
- }
- });
-
- cc.eventManager.addEventListenerWithFixedPriority(listener, 1);
- _am.update();
- }
- }*/
 
 function checkLoadtextture(img){
 

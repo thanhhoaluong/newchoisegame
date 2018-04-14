@@ -1,8 +1,4 @@
-/**
- * Created by PVC on 7/19/2017.
- */
-
-var LayoutControlTable  = ccui.Layout.extend(
+var ControlerTableFrame  = ccui.Layout.extend(
     {
         _btnBackAll:null,
         _btnBack:null,

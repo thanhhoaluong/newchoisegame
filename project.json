@@ -22,7 +22,7 @@
     "src/resource.js",
     "src/WebResource.js",
     "src/Engine/GUI/BaseLayer.js",
-    "src/Engine/GUI/GuiUtil.js",
+    "src/Engine/GUI/GuiUtility.js",
     "src/Engine/GUI/BaseLobby.js",
     "src/Engine/GUI/BaseScene.js",
     "src/Engine/GUI/SceneMgr.js",
@@ -44,10 +44,11 @@
     "src/Engine/Unicorn/index.js",
     "src/Engine/Utility/ClientBridge.js",
 
-    "src/Components/TableLayer/BaseLayerTable.js",
-    "src/Components/TableLayer/LayoutControlTableView.js",
-    "src/Components/TableLayer/LayoutListView.js",
-    "src/Components/TableLayer/LayoutTabView.js",
+    "src/Components/TableLayer/LayerTableFrame.js",
+    "src/Components/TableLayer/ControlerTableFrame.js",
+    "src/Components/TableLayer/DataViewFrame.js",
+    "src/Components/TableLayer/TabViewFrame.js",
+    "src/Components/TableLayer/OtherTabViewFrame.js",
 
     "src/Game/common/GameManager.js",
     "src/Game/Network/ListenClient.js",
@@ -63,7 +64,11 @@
 
     "src/Game/Information/player_info.js",
     "src/Game/Information/hosocanhan.js",
-    "src/Game/Information/sercurity.js",
+    "src/Game/Information/changePassword.js",
+    "src/Game/Information/Sercurity/sercurity.js",
+    "src/Game/Information/Sercurity/smsplus.js",
+    "src/Game/Information/Sercurity/baomatdangnhap.js",
+    "src/Game/Information/Sercurity/ketsat.js",
     "src/Game/Information/historyTranfer.js"
   ]
 }

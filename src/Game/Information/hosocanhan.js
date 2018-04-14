@@ -7,6 +7,7 @@ var HoSoCaNhan = BaseLayer.extend(
     {
         ctor: function () {
             this._super();
+            this.changePass = null;
             return true;
         },
         customizeGUI: function () {
@@ -138,9 +139,9 @@ var HoSoCaNhan = BaseLayer.extend(
                     cellList.width =  213;
 
                     var button = new ccui.Button();
-                    GuiUtil.loadTextureNormal(button, res_Avatar + stt + ".png");
-                    GuiUtil.loadTexturePressed(button, res_Avatar + stt + ".png");
-                    GuiUtil.loadTextureDisabled(button, res_Avatar + stt + ".png");
+                    GuiUtility.loadTextureNormal(button, res_Avatar + stt + ".png");
+                    GuiUtility.loadTexturePressed(button, res_Avatar + stt + ".png");
+                    GuiUtility.loadTextureDisabled(button, res_Avatar + stt + ".png");
                     button.setPosition(cellList.width/2, cellList.height/2);
                     button.setName(stt);
 
@@ -194,6 +195,16 @@ var HoSoCaNhan = BaseLayer.extend(
                     this.HoSoCaNhan.setVisible(true);
                     this.pnavatar.removeAllChildren();
                     break;
+                case HoSoCaNhan.BTN_CHANGE_PASS:
+                    this.addChangePassword();
+                    break;
+            }
+        },
+
+        addChangePassword : function(){
+            if(this.changePass == null){
+                this.changePass = new ChangePassword(this);
+                this.addChild(this.changePass);
             }
         },
 

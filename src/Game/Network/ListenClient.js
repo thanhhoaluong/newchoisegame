@@ -39,6 +39,9 @@ var GameListener = cc.Class.extend(
                 case CMD_CAPTCHA:
                     captcha_base.showCaptcha(jsonData["d"], jsonData["m"]);
                     break;
+                case CMD_CHANGE_PASSWORD:
+                    playerInfo.hscn.changePass.changePassSuccess(jsonData["d"], jsonData["m"]);
+                    break;
             }
 
             return;

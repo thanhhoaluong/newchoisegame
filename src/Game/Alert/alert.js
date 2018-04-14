@@ -62,6 +62,7 @@ var ShowAlert = BaseLayer.extend(
         },
 
         destroyAlam : function(){
+            this.ShowAlert.stopAllActions();
             this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.1, 1.1), cc.delayTime(0.1), cc.scaleTo(0.15,0), cc.callFunc(function(){
                 showalam.setVisible(false);
             }))));
@@ -84,7 +85,7 @@ var ShowAlert = BaseLayer.extend(
 
         showBackground : function(){
             this.setVisible(true);
-            this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1))));
+            this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1), cc.delayTime(2.5), cc.callFunc(this.destroyAlam, this))));
         }
     }
 )

@@ -1,7 +1,3 @@
-/**
- * Created by PVC on 7/18/2017.
- */
-
 var itemList = {
     name: "",
     width: 0,
@@ -10,7 +6,7 @@ var itemList = {
     action: false
 }
 
-var LayoutListView = ccui.Layout.extend(
+var DataViewFrame = ccui.Layout.extend(
     {
         _bgImg: null,
         _listView: null,
@@ -126,7 +122,7 @@ var LayoutListView = ccui.Layout.extend(
             //cell.setPosition(cc.p(378,0));
             cell.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
             cell.setClippingEnabled(true);
-            cell.setBackGroundColor(GuiUtil.color("#3a4480"));
+            cell.setBackGroundColor(GuiUtility.color("#3a4480"));
             if (index % 2 == 1) {
                 cell.setBackGroundColorOpacity(255);
             } else {
@@ -179,14 +175,14 @@ var LayoutListView = ccui.Layout.extend(
                 }
                 if (this.isTop && i == 0 && index < 3) {
                     var imageNameIndex = index + 1;
-                    titleName = GuiUtil.createSprite("res/common/top" + imageNameIndex + ".png")
+                    titleName = GuiUtility.createSprite("res/common/top" + imageNameIndex + ".png")
                 }
                 titleName.setTag(i);
                 titleName.setPosition(position);
                 cell.addChild(titleName);
 
                 if (i != this._arrInfoColom.length - 1) {
-                    var spNganCot = GuiUtil.createSprite("res/Minigame/ImageChung/vachdung.png");
+                    var spNganCot = GuiUtility.createSprite("res/Minigame/ImageChung/vachdung.png");
                     spNganCot.setPosition(cc.p(position.x + this._arrInfoColom[i].width / 2, 18.25));
                     cell.addChild(spNganCot);
                 }
@@ -195,31 +191,31 @@ var LayoutListView = ccui.Layout.extend(
             return cell;
         },
         genColor: function (color, index, moneyType) {
-            if (color == LayoutListView.COLOR_NORMAL) {
+            if (color == DataViewFrame.COLOR_NORMAL) {
                 return cc.color(255, 255, 255);
             }
-            if (color == LayoutListView.COLOR_TOP) {
+            if (color == DataViewFrame.COLOR_TOP) {
                 if (index == 0)
                     return cc.color(255, 223, 88);
                 else
                     return cc.color(232, 218, 173);
             }
-            if (color == LayoutListView.COLOR_MONEY) {
+            if (color == DataViewFrame.COLOR_MONEY) {
                 if (moneyType == MONEY_VIN)
-                    return GuiUtil.color(255, 222, 0);
+                    return GuiUtility.color(255, 222, 0);
                 else
                     return cc.color(233, 235, 235);
             }
 
-            if (color == LayoutListView.COLOR_MONEY_LSGD) {
+            if (color == DataViewFrame.COLOR_MONEY_LSGD) {
                 if (moneyType == 1 || moneyType == 3 || moneyType == 5) {
-                    return GuiUtil.color(255, 222, 0);
+                    return GuiUtility.color(255, 222, 0);
                 } else {
                     return cc.color(233, 235, 235);
                 }
             }
 
-            if (color == LayoutListView.COLOR_MONEY_VQV) {
+            if (color == DataViewFrame.COLOR_MONEY_SLOT) {
                 return cc.color(192, 193, 195);
             }
 
@@ -238,7 +234,7 @@ var LayoutListView = ccui.Layout.extend(
             cell.width = this._listView.width;
             cell.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
             cell.setClippingEnabled(true);
-            cell.setBackGroundColor(GuiUtil.color("#000000"));
+            cell.setBackGroundColor(GuiUtility.color("#000000"));
 
             for (var i = 0; i < this._datas.length; i++) {
                 var childcell = this.createItemListView(this._datas[i], i);
@@ -275,11 +271,11 @@ var LayoutListView = ccui.Layout.extend(
 
     }
 );
-LayoutListView.COLOR_NORMAL = 0;
-LayoutListView.COLOR_TOP = 1;
-LayoutListView.COLOR_MONEY = 2;
-LayoutListView.COLOR_MONEY_LSGD = 3;
-LayoutListView.COLOR_MONEY_VQV = 4;
+DataViewFrame.COLOR_NORMAL = 0;
+DataViewFrame.COLOR_TOP = 1;
+DataViewFrame.COLOR_MONEY = 2;
+DataViewFrame.COLOR_MONEY_LSGD = 3;
+DataViewFrame.COLOR_MONEY_SLOT = 4;
 
 
 

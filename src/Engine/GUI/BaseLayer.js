@@ -442,9 +442,9 @@ var BaseLayer = cc.Layer.extend({
     createSlider: function (parent, name, position, size, percent, images, enableTouch, options) {
         var child = new ccui.Slider();
 
-        images[0] && child.loadBarTexture(images[0], GuiUtil.checkTextureType(images[0]));
-        images[1] && child.loadSlidBallTextures(images[1], images[1], images[1], GuiUtil.checkTextureType(images[1]));
-        images[2] && child.loadProgressBarTexture(images[2], GuiUtil.checkTextureType(images[2]));
+        images[0] && child.loadBarTexture(images[0], GuiUtility.checkTextureType(images[0]));
+        images[1] && child.loadSlidBallTextures(images[1], images[1], images[1], GuiUtility.checkTextureType(images[1]));
+        images[2] && child.loadProgressBarTexture(images[2], GuiUtility.checkTextureType(images[2]));
         child.setTouchEnabled(enableTouch);
         child.setPosition(position);
         child.ignoreContentAdaptWithSize(false);

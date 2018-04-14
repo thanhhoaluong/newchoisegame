@@ -1,7 +1,4 @@
-/**
- * Created by PVC on 7/17/2017.
- */
-var BaseLayerTable = BaseLayer.extend(
+var LayerTableFrame = BaseLayer.extend(
     {
         _titleText:null,
         _size:null,
@@ -23,7 +20,7 @@ var BaseLayerTable = BaseLayer.extend(
             this._bgLayer.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
             this._bgLayer.setBackGroundColor(cc.color.BLACK);
             this._bgLayer.setBackGroundColorOpacity(150);
-            this._bgLayer.setTag(BaseLayerTable.BTN_EXIT);
+            this._bgLayer.setTag(LayerTableFrame.BTN_EXIT);
             this._bgLayer.addTouchEventListener(this.onTouchEventHandler, this);
 
             this.createImage(this,"_bgImage",cc.p(640,360),res_TableGui + "bg_table.png",this._size);
@@ -94,7 +91,7 @@ var BaseLayerTable = BaseLayer.extend(
         ,
         showLoading : function(){
             if(this._pContent != null && this._pContent.getChildByName("loadingdatamaster") == null){
-                var loading = GuiUtil.createSprite("res/ResourceMenuTab/Mail/btnRefresh.png");
+                var loading = GuiUtility.createSprite("res/ResourceMenuTab/Mail/btnRefresh.png");
                 var x = this._pContent.getContentSize().width/2;
                 var y = this._pContent.getContentSize().height/2;
                 loading.setPosition(cc.p(x,y));
@@ -124,13 +121,13 @@ var BaseLayerTable = BaseLayer.extend(
 
 )
 
-BaseLayerTable.BTN_EXIT = -1;
-BaseLayerTable.SIZEW = 1096;
-BaseLayerTable.SIZEH = 628;
-BaseLayerTable.SIZE_TAB_W = 1002;
-BaseLayerTable.SIZE_TAB_H = 40;
+LayerTableFrame.BTN_EXIT = -1;
+LayerTableFrame.SIZEW = 1096;
+LayerTableFrame.SIZEH = 628;
+LayerTableFrame.SIZE_TAB_W = 1002;
+LayerTableFrame.SIZE_TAB_H = 40;
 
-BaseLayerTable.BTN_BACK_ALL = 0;
-BaseLayerTable.BTN_BACK = 1;
-BaseLayerTable.BTN_NEXT = 2;
-BaseLayerTable.BTN_NEXT_ALL = 3;
+LayerTableFrame.BTN_BACK_ALL = 0;
+LayerTableFrame.BTN_BACK = 1;
+LayerTableFrame.BTN_NEXT = 2;
+LayerTableFrame.BTN_NEXT_ALL = 3;

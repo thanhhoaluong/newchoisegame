@@ -195,7 +195,7 @@ var LoginScene = BaseLayer.extend(
         },
 
         LoginSuccess : function(info, error){
-            cc.log("info = " + info.Id);
+            cc.log("info = " + info.nickname);
             // update thong tin player
             if(error != ""){
                 showAlam(0, error, null);

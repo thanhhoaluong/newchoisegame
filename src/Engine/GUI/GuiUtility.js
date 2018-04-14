@@ -1,6 +1,6 @@
-var GuiUtil = GuiUtil || {};
+var GuiUtility = GuiUtility || {};
 
-GuiUtil.createSprite = function (name, rect) {
+GuiUtility.createSprite = function (name, rect) {
 
     if ((typeof name == "undefined") || (name == "")) {
         return new cc.Sprite();
@@ -15,12 +15,12 @@ GuiUtil.createSprite = function (name, rect) {
     }
 };
 
-GuiUtil.changeImage = function (image, name) {
+GuiUtility.changeImage = function (image, name) {
     image.setScale9Enabled(false);
-    image.loadTexture(name, GuiUtil.checkTextureType(name));
+    image.loadTexture(name, GuiUtility.checkTextureType(name));
 };
 
-GuiUtil.changeSprite = function (sprite, name) {
+GuiUtility.changeSprite = function (sprite, name) {
     if (cc.spriteFrameCache.getSpriteFrame(name)) {
         sprite.setSpriteFrame(name);
     }
@@ -28,7 +28,7 @@ GuiUtil.changeSprite = function (sprite, name) {
         sprite.setTexture(name);
     }
 };
-GuiUtil.createImage = function (name, size) {
+GuiUtility.createImage = function (name, size) {
     var imgView = null;
     if (cc.spriteFrameCache.getSpriteFrame(name)) {
         cc.log("true");
@@ -43,13 +43,13 @@ GuiUtil.createImage = function (name, size) {
     imgView.setContentSize(size);
     return imgView;
 };
-//GuiUtil.changeButtonBg = function(image,name)
+//GuiUtility.changeButtonBg = function(image,name)
 
-GuiUtil.changeSpriteWithTexture = function (sprite, texture) {
+GuiUtility.changeSpriteWithTexture = function (sprite, texture) {
     sprite.setTexture(texture);
 };
 
-GuiUtil.initSprite = function (sprite, image, rect) {
+GuiUtility.initSprite = function (sprite, image, rect) {
     if (cc.spriteFrameCache.getSpriteFrame(image)) {
         sprite.initWithTexture(image, rect);
     }
@@ -58,7 +58,7 @@ GuiUtil.initSprite = function (sprite, image, rect) {
     }
 };
 
-GuiUtil.createSimpleButton = function (normal, texType) {
+GuiUtility.createSimpleButton = function (normal, texType) {
     texType = texType || ccui.Widget.LOCAL_TEXTURE;
     if (cc.spriteFrameCache.getSpriteFrame(normal)) {
         texType = ccui.Widget.PLIST_TEXTURE;
@@ -69,7 +69,7 @@ GuiUtil.createSimpleButton = function (normal, texType) {
     return btnKeep;
 };
 
-GuiUtil.getWinSize = function () {
+GuiUtility.getWinSize = function () {
     if (!cc.sys.isNative) {
         return cc.size(1280, 720);
     }
@@ -78,47 +78,47 @@ GuiUtil.getWinSize = function () {
     }
 };
 
-GuiUtil.getCardResource = function (cardId) {
+GuiUtility.getCardResource = function (cardId) {
     var number = 52;
     if (0 <= cardId && cardId < 4) number = 48 + cardId;
     else if (4 <= cardId && cardId <= 51) number = cardId - 4;
     return "res/CardGame/LaBai/labai_" + number + ".png";
 };
 
-GuiUtil.checkTextureType = function (image) {
+GuiUtility.checkTextureType = function (image) {
     return image && cc.spriteFrameCache.getSpriteFrame(image) ? ccui.Widget.PLIST_TEXTURE : ccui.Widget.LOCAL_TEXTURE;
 };
 
-GuiUtil.loadButtonTextures = function (target, image, image1, image2) {
-    target.loadTextures(image, image1, image2, GuiUtil.checkTextureType(image));
+GuiUtility.loadButtonTextures = function (target, image, image1, image2) {
+    target.loadTextures(image, image1, image2, GuiUtility.checkTextureType(image));
 };
 
-GuiUtil.createButton = function (image, image1, image2) {
+GuiUtility.createButton = function (image, image1, image2) {
     if (!image) return new ccui.Button();
-    if (image instanceof Array) return new ccui.Button(image[0], image[1] || image[0], image[2] || image[0], GuiUtil.checkTextureType(image[0]));
-    return new ccui.Button(image, image1 || image, image2 || image, GuiUtil.checkTextureType(image));
+    if (image instanceof Array) return new ccui.Button(image[0], image[1] || image[0], image[2] || image[0], GuiUtility.checkTextureType(image[0]));
+    return new ccui.Button(image, image1 || image, image2 || image, GuiUtility.checkTextureType(image));
 };
 
-GuiUtil.loadTextureNormal = function (target, image) {
-    target.loadTextureNormal(image, GuiUtil.checkTextureType(image));
+GuiUtility.loadTextureNormal = function (target, image) {
+    target.loadTextureNormal(image, GuiUtility.checkTextureType(image));
 };
 
-GuiUtil.loadTexturePressed = function (target, image) {
-    target.loadTexturePressed(image, GuiUtil.checkTextureType(image));
+GuiUtility.loadTexturePressed = function (target, image) {
+    target.loadTexturePressed(image, GuiUtility.checkTextureType(image));
 };
 
-GuiUtil.loadTextureDisabled = function (target, image) {
-    target.loadTextureDisabled(image, GuiUtil.checkTextureType(image));
+GuiUtility.loadTextureDisabled = function (target, image) {
+    target.loadTextureDisabled(image, GuiUtility.checkTextureType(image));
 };
 
-GuiUtil.setBackGroundColor = function (layout, color, opacity) {
+GuiUtility.setBackGroundColor = function (layout, color, opacity) {
     layout.setBackGroundColorType(ccui.Layout.BG_COLOR_SOLID);
     layout.setBackGroundColor(color);
     layout.setBackGroundColorOpacity(opacity);
     return layout;
 };
 
-GuiUtil.clearEffect = function () {
+GuiUtility.clearEffect = function () {
     var gameGui = SceneMgr.getInstance().getRunningScene().getMainLayer();
     if (gameGui != null && gameGui != undefined) {
         if (gameGui.effectLayer) {
@@ -128,31 +128,31 @@ GuiUtil.clearEffect = function () {
     }
 };
 
-GuiUtil.showWaitingGui = function () {
+GuiUtility.showWaitingGui = function () {
     // var waitingGui = gv.guiMgr.getGuiById(GuiId.WAITING_GUI);
     // if(waitingGui == null){
     //     gv.guiMgr.addGui(new GuiWaiting(), GuiId.WAITING_GUI, LayerId.LAYER_LOADING);
     // }
 };
 
-GuiUtil.hideWaitingGui = function () {
+GuiUtility.hideWaitingGui = function () {
     // var waitingGui = gv.guiMgr.getGuiById(GuiId.WAITING_GUI);
     // if(waitingGui!=null)
     //     waitingGui.destroy();
 };
-GuiUtil.color = function (r, g, b, a) {
+GuiUtility.color = function (r, g, b, a) {
     if (typeof r == "string" && cc.sys.isNative) {
-        return cc.color.apply(this, GuiUtil.convertHexToRgbA(r));
+        return cc.color.apply(this, GuiUtility.convertHexToRgbA(r));
     }
     return cc.color(r, g, b, a);
 }
 
-GuiUtil.getFontNameButton = function (fontname) {
+GuiUtility.getFontNameButton = function (fontname) {
     fontname = cc.sys.isNative ? "res/Font/" + fontname + ".ttf" : fontname;
     return fontname;
 }
 
-GuiUtil.convertHexToRgbA = function (hex) {
+GuiUtility.convertHexToRgbA = function (hex) {
     var c;
     if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
         c = hex.substring(1).split('');
@@ -165,12 +165,12 @@ GuiUtil.convertHexToRgbA = function (hex) {
     throw new Error('Bad Hex');
 };
 
-GuiUtil.textColor = {
-    textNormal: GuiUtil.color("#60401b"),
-    description: GuiUtil.color("#feeaca")
+GuiUtility.textColor = {
+    textNormal: GuiUtility.color("#60401b"),
+    description: GuiUtility.color("#feeaca")
 };
 
-GuiUtil.removeTextureList = function () {
+GuiUtility.removeTextureList = function () {
     var resourceList = cc.extend([], arguments);
     resourceList.forEach(function (resources) {
         if (resources instanceof Array) {
@@ -184,7 +184,7 @@ GuiUtil.removeTextureList = function () {
     });
 };
 
-GuiUtil.addCicleText = function (parent, text, radius, fontName, fontSize, color, defaultWidthText) {
+GuiUtility.addCicleText = function (parent, text, radius, fontName, fontSize, color, defaultWidthText) {
     var textArray = text.split("");
     var layout = new BaseLayer();
     parent.addChild(layout);

@@ -1,6 +1,3 @@
-/**
- * Created by PVC on 9/16/2017.
- */
 var GameWebSocket = WebsocketClient.extend({
     ctor: function(){
         this._super();
