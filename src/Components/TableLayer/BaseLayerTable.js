@@ -17,7 +17,6 @@ var BaseLayerTable = BaseLayer.extend(
         ctor: function (){
 
             this._super();
-            //cc.spriteFrameCache.addSpriteFrames("res/Minigame/ImageChung/PlistImageChung.plist");
             this._size = cc.size(1103,642);
             this._titleText = "";
             this.createLayout(this,"_bgLayer",cc.p(640,360),null,cc.size(1920,1280),true);
@@ -50,18 +49,16 @@ var BaseLayerTable = BaseLayer.extend(
         {
             switch (type) {
                 case ccui.Widget.TOUCH_ENDED:
-                    this.removeFromParent();
-                    if(typeof this.setNullFromParent === 'function') this.setNullFromParent();
+                    this.runAction((cc.sequence(cc.scaleTo(0.1, 1.1), cc.delayTime(0.1), cc.scaleTo(0.15,0),cc.callFunc(this.destroyBase, this))));
                     break;
             }
         },
-        /*onButtonRelease: function(btn, id){
-            switch(id){
-                case BaseLayerTable.BTN_EXIT:
-                    this.removeFromParent();
-                    break;
-            }
-        },*/
+
+        destroyBase :function(){
+            this.removeFromParent();
+            if(typeof this.setNullFromParent === 'function') this.setNullFromParent();
+        },
+
         setTitleText:function(text, options)
         {
             var fontSize = (options && options.fontSize) ? options.fontSize : 35;
@@ -73,7 +70,6 @@ var BaseLayerTable = BaseLayer.extend(
         },
         getTiLeSize: function()
         {
-            //return this._size.width/BaseLayerTable.SIZEW;
             return 1;
         }
         ,
@@ -115,7 +111,6 @@ var BaseLayerTable = BaseLayer.extend(
         },
 
         hideLoading : function (){
-            //this.panelLichSuMiniPoker.getChildByName("loadingdata").stopAllActions();
             if(this._pContent.getChildByName("loadingdatamaster") == null)
             {
 
