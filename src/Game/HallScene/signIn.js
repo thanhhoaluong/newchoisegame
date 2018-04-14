@@ -62,7 +62,7 @@ var LoginScene = BaseLayer.extend(
             this.createBottom();
             this.createListSlot();
             this.createListMiniGame();
-            this.connectSocketClient();
+            this.getConfig();
         },
 
         createLogin : function(){
@@ -224,6 +224,31 @@ var LoginScene = BaseLayer.extend(
                 this.signUp = new SignUp(this)
                 this.addChild(this.signUp);
             }
+        },
+
+        getConfig : function(){
+            var url = urlGetConfig()
+            sendRequest(url, null, false, this.callbackGetConfig, this.callBackError);
+        },
+
+        callbackGetConfig : function(response){
+            cc.log("config game = " + response);
+            var jsonData = JSON.parse(response);
+
+            configMyGame.servers = jsonData["servers"];
+            configMyGame.module = jsonData["module"];
+            configMyGame.version = jsonData["version"];
+            configMyGame.isUpdate = jsonData["isUpd"];
+            configMyGame.urlUpdate = jsonData["urlUpd"];
+            configMyGame.urlResource = jsonData["urlRes"];
+
+            //openSocketServer();
+           // return;
+            loginscene.connectSocketClient();
+        },
+
+        callbackError : function(){
+            showAlam(0, "Hệ thống tạm thời gián đoạn. Vui lòng quay lại sau", null);
         },
 
         connectSocketClient : function(){

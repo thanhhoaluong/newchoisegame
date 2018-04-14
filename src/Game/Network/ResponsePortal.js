@@ -19,3 +19,4 @@ var CmdgetCaptcha = function () {
 var CmdChangePassword = function (oldpass, newpass, captcha) {
     return JSON.stringify({"i":1,"c":54,"d":{"pass":oldpass,"passNew":newpass, "captcha":captcha}});
 }
+

@@ -14,7 +14,7 @@ var GameListener = cc.Class.extend(
                 this.gameWsState = CLIENT_STATE.CONNECTED;
             } else {
                 this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
-                showAlam(0, "Kh�ng th? k?t n?i m�y ch?. Vui l�ng th? l?i sau!", null);
+                showAlam(0, "Không thể kết nối máy chủ. Vui lòng quay lại sau!", null);
 
             }
         },

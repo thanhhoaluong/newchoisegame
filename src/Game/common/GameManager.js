@@ -30,6 +30,14 @@ var userInfo = {
     },
 }
 
-var configGame = [];
+var configMyGame = {
+    servers : null,
+    module : null,
+    version : null,
+    isUpdate : null,
+    urlUpdate : null,
+    urlResource : null,
+};
+
 var color_zo = cc.color("#edd31f");
 var color_xu = cc.color("#e5e5e5");

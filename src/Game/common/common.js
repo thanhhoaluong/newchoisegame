@@ -75,9 +75,13 @@ var res_TableGui = "res/TableGui/";
 var res_HoSo = "res/HoSo/";
 var res_Avatar = "res/Avatar/";
 
-var DON_VI_TIEN_THAT = "Zo";
-var DON_VI_TIEN_TANG = "Xu";
+var DON_VI_TIEN_THAT = "ZO";
+var DON_VI_TIEN_TANG = "XU";
+var MONEY_THAT = 1;
+var MONEY_TANG = 0;
 var TEN_GAME = "Zoday";
+
+
 var Type_Web = browserName();
 
 var sendRequest = function (url, params, isPost, callback, errorcallback, callbackHead) {
@@ -673,8 +677,8 @@ var RobotoRegular = {fontName: "Roboto-Regular", src: [{src: "res/Fonts/Roboto-R
 var fontRobotoBlack = {fontName: "Roboto-Black", src: [{src: "res/Fonts/Roboto-Black.ttf", type: "truetype"}]};
 var fontRobotoBold = {fontName: "Roboto-Bold", src: [{src: "res/Fonts/Roboto-Bold.ttf", type: "truetype"}]};
 var UTMBebas = {fontName: "UTM-Bebas", src: [{src: "res/Fonts/UTM-Bebas.ttf", type: "truetype"}]};
-var fontTahoma = {fontName: "Tahoma", src: [{src: "res/Fonts/tahoma.ttf", type: "truetype"}]};
-var fontTahomaB = {fontName: "Tahomabd", src: [{src: "res/Fonts/tahomabd.ttf", type: "truetype"}]};
+var fontTahoma = {fontName: "Tahoma", src: [{src: "res/Fonts/Tahoma.ttf", type: "truetype"}]};
+var fontTahomaB = {fontName: "Tahomabd", src: [{src: "res/Fonts/Tahomabd.ttf", type: "truetype"}]};
 var fontUTMAlterGothic  = {fontName: "UTM-Alter-Gothic", src: [{src: "res/Fonts/UTM-Alter-Gothic.ttf", type: "truetype"}]};
 
 var fontENGR  = {fontName: "ENGR", src: [{src: "res/Fonts/ENGR.ttf", type: "truetype"}]};
@@ -693,26 +697,26 @@ var TX_silverFontX2 = "res/Font/TXFont/TX_silverFont_export2x.fnt";
 
 var fontUTMAurora = {fontName: "UTM-Aurora", src: [{src: "res/Fonts/UTM-Aurora.ttf", type: "truetype"}]};
 
-
-var notification_web = function () {
-    if (!Notification) {
-        alert('Desktop notifications not available in your browser. Try Chromium.');
-        return;
-    }
-
-    if (Notification.permission !== "granted")
-        Notification.requestPermission();
-    else {
-        var notification = new Notification('Notification title', {
-            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-            body: "Hey there! You've been notified!",
-        });
-
-        notification.onclick = function () {
-            window.open("http://stackoverflow.com/a/13328397/1269037");
-        };
-
-    }
-
-}
+//
+//var notification_web = function () {
+//    if (!Notification) {
+//        alert('Desktop notifications not available in your browser. Try Chromium.');
+//        return;
+//    }
+//
+//    if (Notification.permission !== "granted")
+//        Notification.requestPermission();
+//    else {
+//        var notification = new Notification('Notification title', {
+//            icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+//            body: "Hey there! You've been notified!",
+//        });
+//
+//        notification.onclick = function () {
+//            window.open("http://stackoverflow.com/a/13328397/1269037");
+//        };
+//
+//    }
+//
+//}
 

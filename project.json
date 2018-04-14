@@ -40,6 +40,7 @@
     "src/Engine/Network/WsClient.js",
     "src/Engine/Utility/EventHandlerManager.js",
     "src/Game/common/common.js",
+    "src/Game/common/getConfigAPI.js",
     "src/Game/common/md5.js",
     "src/Engine/Unicorn/index.js",
     "src/Engine/Utility/ClientBridge.js",
