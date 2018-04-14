@@ -71,6 +71,8 @@ var HallScene = BaseLayer.extend(
             hallscene.removeFromParent(true);
             hallscene = null;
             loginscene.SignIn.setVisible(true);
+            userInfo._isSignIned = false;
+            loginscene.changeBottomWhenSignIn();
         }
     }
 )

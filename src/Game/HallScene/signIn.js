@@ -98,7 +98,7 @@ var LoginScene = BaseLayer.extend(
             this.createButton(this.bottom,"bt_android",LoginScene.BTN_APK,cc.p(580,25),true,res_MenuSetting + "mn_apk.png",res_MenuSetting + "mn_apk.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.bottom,"bt_fanpage",LoginScene.BTN_FANPAGE,cc.p(753,25),true,res_MenuSetting + "mn_fanpage.png",res_MenuSetting + "mn_fanpage.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.bottom,"bt_payment",LoginScene.BTN_PAYMENT,cc.p(968,45),true,res_MenuSetting + "mn_shop.png",res_MenuSetting + "mn_shop.png",ccui.Widget.PLIST_TEXTURE);
-            this.createButton(this.bottom,"bt_email",LoginScene.BTN_EMAIL,cc.p(376,45),true,res_MenuSetting + "btn_mail.png",res_MenuSetting + "btn_mail.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.bottom,"bt_email",LoginScene.BTN_EMAIL,cc.p(376,25),true,res_MenuSetting + "btn_mail.png",res_MenuSetting + "btn_mail.png",ccui.Widget.PLIST_TEXTURE);
             this.bt_email.setVisible(false);
         },
 
@@ -236,10 +236,10 @@ var LoginScene = BaseLayer.extend(
         changeBottomWhenSignIn : function (){
             if(userInfo._isSignIned == false){
                 this.bt_news.setPosition(cc.p(249,this.bt_news.getPositionY()));
-                this.bt_ios.setPosition(cc.p(249,this.bt_ios.getPositionY()));
-                this.bt_android.setPosition(cc.p(249,this.bt_android.getPositionY()));
-                this.bt_fanpage.setPosition(cc.p(249,this.bt_fanpage.getPositionY()));
-                this.bt_payment.setPosition(cc.p(249,this.bt_payment.getPositionY()));
+                this.bt_ios.setPosition(cc.p(416,this.bt_ios.getPositionY()));
+                this.bt_android.setPosition(cc.p(580,this.bt_android.getPositionY()));
+                this.bt_fanpage.setPosition(cc.p(753,this.bt_fanpage.getPositionY()));
+                this.bt_payment.setPosition(cc.p(968,this.bt_payment.getPositionY()));
                 this.bt_email.setVisible(false);
             }else{
                 this.bt_news.setPosition(cc.p(222,this.bt_news.getPositionY()));
