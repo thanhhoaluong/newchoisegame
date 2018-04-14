@@ -11,11 +11,12 @@ var HoSoCaNhan = BaseLayer.extend(
         },
         customizeGUI: function () {
             //cc.log("HoSoCaNhan");
+            this.createLayout(this,"ProfileUser",cc.p(640,370),null,cc.size(1280,720),false);
             this.createHoSo();
         },
 
         createHoSo : function(){
-            this.createLayout(this,"HoSoCaNhan",cc.p(640,370),null,cc.size(1280,720),false);
+            this.createLayout(this.ProfileUser,"HoSoCaNhan",cc.p(640,370),null,cc.size(1280,720),false);
             this.createSprite(this.HoSoCaNhan,"sp_avatar",cc.p(296,384),res_Avatar + userInfo.Info.avatar + ".png");
             this.createButton(this.HoSoCaNhan,"bt_selfphi",HoSoCaNhan.BTN_CAMERA,cc.p(231,449),true,res_HoSo + "bt_selphi.png",res_HoSo + "bt_selphi.png",ccui.Widget.PLIST_TEXTURE);
 
@@ -100,11 +101,13 @@ var HoSoCaNhan = BaseLayer.extend(
             this.lb_mobile.setContentSize(cc.size(200, 26));
             this.lb_mobile.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_mobile.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+
+            this.createLayout(this.ProfileUser,"pnavatar",cc.p(640,360),null,cc.size(1280,720),false);
+
         },
 
         createAvatar : function(){
             this.HoSoCaNhan.setVisible(false);
-            this.createLayout(this,"pnavatar",cc.p(640,370),null,cc.size(1280,720),false);
             this.createListView(this.pnavatar, "lv_avatar", cc.p(640, 330), cc.size(1070, 420));
             this.lv_avatar.setTouchEnabled(true);
             this.lv_avatar.setBounceEnabled(true);
@@ -139,8 +142,7 @@ var HoSoCaNhan = BaseLayer.extend(
                     GuiUtil.loadTexturePressed(button, res_Avatar + stt + ".png");
                     GuiUtil.loadTextureDisabled(button, res_Avatar + stt + ".png");
                     button.setPosition(cellList.width/2, cellList.height/2);
-                    stt++;
-                    button.setName("avatar_" + stt);
+                    button.setName(stt);
 
                     button.addTouchEventListener(function (sender, type) {
                         switch (type) {
@@ -151,6 +153,13 @@ var HoSoCaNhan = BaseLayer.extend(
 
                     }, this);
                     cellList.addChild(button);
+                    this.createSprite(cellList,"sp_checkGreen_" + stt,cc.p(42,cellList.height - 38),res_HoSo + "checkGreen.png");
+                    if(stt == userInfo.Info.avatar){
+                        this["sp_checkGreen_" + stt].setVisible(true);
+                    }else{
+                        this["sp_checkGreen_" + stt].setVisible(false);
+                    }
+                    stt++;
                     listview.pushBackCustomItem(cellList);
                 }
                 this.lv_avatar.pushBackCustomItem(listview);
@@ -163,8 +172,13 @@ var HoSoCaNhan = BaseLayer.extend(
             this.createButton(this.pnavatar,"bt_back",HoSoCaNhan.BTN_BACK,cc.p(138,634),true,res_TableGui + "bt_back.png",res_TableGui + "bt_back.png",ccui.Widget.PLIST_TEXTURE);
         },
 
-        Click_Avatar : function(){
+        Click_Avatar : function(stt){
+            cc.log("click ava : " + stt);
+            for(var i = 1; i < 14; i ++) {
+                this["sp_checkGreen_" + i].setVisible(false);
+            }
 
+            this["sp_checkGreen_" + stt].setVisible(true);
         },
 
         onButtonRelease: function (button, id) {
@@ -172,7 +186,24 @@ var HoSoCaNhan = BaseLayer.extend(
                 case HoSoCaNhan.BTN_CAMERA:
                     this.createAvatar();
                     break;
+                case HoSoCaNhan.BTN_BACK:
+                    this.backToHoSo();
+                    break;
+                case HoSoCaNhan.BTN_UPDATE_AVATAR:
+                    this.updateAvatarUser();
+                    this.HoSoCaNhan.setVisible(true);
+                    this.pnavatar.removeAllChildren();
+                    break;
             }
+        },
+
+        backToHoSo : function(){
+            this.HoSoCaNhan.setVisible(true);
+            this.pnavatar.removeAllChildren();
+        },
+
+        updateAvatarUser : function(){
+            cc.log("update avatar User");
         },
 
         onEnter: function(){

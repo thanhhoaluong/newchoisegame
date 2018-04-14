@@ -10,11 +10,11 @@ var GameListener = cc.Class.extend(
              cc.log("Connect Socket " + isSuccess);
             conectSocketClient = isSuccess;
             if (isSuccess) {
-                loginscene.conectsocket.clearReconnectSocket();
+                conectsocket.clearReconnectSocket();
                 this.gameWsState = CLIENT_STATE.CONNECTED;
             } else {
                 this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
-                showAlam(0, "Không th? k?t n?i máy ch?! Vui lòng th? l?i sau.", null);
+                showAlam(0, "Không th? k?t n?i máy ch?. Vui lòng th? l?i sau!", null);
 
             }
         },
@@ -32,6 +32,12 @@ var GameListener = cc.Class.extend(
             switch (jsonData["c"]) {
                 case CMD_LOGIN:
                     loginscene.LoginSuccess(jsonData["d"], jsonData["m"]);
+                    break;
+                case CMD_REGISTER:
+                    loginscene.signUp.RegisterSuccess(jsonData["d"], jsonData["m"]);
+                    break;
+                case CMD_CAPTCHA:
+                    captcha_base.showCaptcha(jsonData["d"], jsonData["m"]);
                     break;
             }
 

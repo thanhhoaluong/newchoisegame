@@ -43,6 +43,7 @@ var BaseLayerTable = BaseLayer.extend(
             this._btnExit.setPressedActionEnabled(true);
             this._btnExit.addTouchEventListener(this.onTouchExit, this);
             this._btnExit.setTag(2);
+            this.runAction(cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1)));
 
         },
         onTouchExit:function(sender, type)

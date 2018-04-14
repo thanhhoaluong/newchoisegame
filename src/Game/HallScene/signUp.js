@@ -36,7 +36,7 @@ var SignUp = BaseLayer.extend(
             this.ed_pass_reg.setFontColor(cc.color.BLACK);
 
             this.createImage(this.SignUp, "sp_captcha", cc.p(679,284), res_login_scene + "bg_edit_s.png", cc.size(167, 56));
-            this.createEditBox(this.SignUp,"ed_captcha",cc.p(679,284),"","Nhập mã",fontArial.fontName,22,cc.size(147,56),null,cc.TEXT_ALIGNMENT_CENTER,5);
+            this.createEditBox(this.SignUp,"ed_captcha",cc.p(679,284),"","Nhập mã",fontArial.fontName,22,cc.size(147,56),null,cc.TEXT_ALIGNMENT_CENTER,6);
             this.ed_captcha.setPlaceholderFontColor(cc.color.GRAY);
             this.ed_captcha.setFontColor(cc.color.BLACK);
 
@@ -52,7 +52,7 @@ var SignUp = BaseLayer.extend(
                 this.ed_captcha.nextTabFocus = this.ed_username_reg;
             }
 
-            this.createButton(this.SignUp,"bt_refresh",SignUp.BTN_REFRESH,cc.p(874,284),true,res_SignUp + "b_refresh.png",res_SignUp + "b_refresh.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.SignUp,"bt_refresh",SignUp.BTN_REFRESH,cc.p(950,284),true,res_SignUp + "b_refresh.png",res_SignUp + "b_refresh.png",ccui.Widget.PLIST_TEXTURE);
 
             this.createImage(this.SignUp, "sp_ckb_reg", cc.p(770,237), res_SignUp + "tx_dksd.png", cc.size(331, 21));
             this.createCheckBox(this.SignUp, "ckb_reg", cc.p(562, 237), true, res_SignUp + "/ck.png", res_SignUp + "/ck.png", res_SignUp + "/cked.png", res_SignUp + "/ck.png", res_SignUp + "/cked.png");
@@ -64,6 +64,7 @@ var SignUp = BaseLayer.extend(
             //this.createText(this.bt_create_acc, "lb_create_acc", cc.p(this.bt_create_acc.width/2, this.bt_create_acc.height/2), "TẠO TÀI KHOẢN", fontTahomaB.fontName, 25);
 
             this.SignUp.runAction(cc.sequence(cc.scaleTo(0.05,1.1), cc.delayTime(0.1), cc.scaleTo(0.10,1)));
+            this.addSceneCaptcha();
         },
 
         onEnter: function(){
@@ -71,18 +72,93 @@ var SignUp = BaseLayer.extend(
 
         },
 
+        addSceneCaptcha : function(){
+            if(captcha_base == null){
+                captcha_base = new Captcha(this, 850, 284);
+                this.SignUp.addChild(captcha_base);
+            }
+        },
+
         onButtonRelease: function (button, id) {
             switch (id) {
                 case SignUp.CLOSE:
                     this.destroyBase();
                     break;
-
+                case SignUp.BTN_CREATE:
+                    this.callRegisterAccount();
+                    break;
+                case SignUp.BTN_REFRESH:
+                    captcha_base.getCatpcha();
+                    break;
             }
         },
 
+        callRegisterAccount : function(){
+            var username = this.ed_username_reg.getString();
+            var nickname = this.ed_nickname_reg.getString();
+            var password = this.ed_pass_reg.getString();
+            var captcha = this.ed_captcha.getString();
+
+            var str = "";
+
+            if (username == null || username.length < 6 || username.length > 16) {
+                str = "Tên tài khoản trong khoảng từ 6 - 16 ký tự!";
+            }else if (nickname == null || nickname.length < 6 || nickname.length > 16) {
+                str = "Tên nhân vật trong khoảng từ 6 - 16 ký tự!";
+            }else if (password == null || password.length < 6 || password.length > 16) {
+                str = "Password trong khoảng từ 6 - 16 ký tự!";
+            } else if (password == username) {
+                str = "Mật khẩu không được trùng với Tên tài khoản!";
+            } else if (username == nickname) {
+                str = "Tên nhân vật không được trùng với Tên tài khoản!";
+            } else if (this.ckb_reg.isSelected() == false) {
+                str = "Vui lòng đọc và đồng ý với các điều khoản của " + TEN_GAME + "!";
+            } else if (captcha == "" || captcha == null) {
+                str = "Mã xác nhận không chính xác!";
+            }
+
+            if(str != ""){
+                showAlam(0, str, null);
+                return;
+            }
+
+            var url = CmdSendRegister(username, password, captcha , loginscene.platform);
+            conectsocket.gameClient.send(url);
+        },
+
+        RegisterSuccess : function(info, error){
+            cc.log("register = ");
+            // update thong tin player
+            if(error != ""){
+                showAlam(0, error, null);
+                return;
+            }
+
+            userInfo.userName = info.Name;
+            var pass = this.ed_pass_reg.getString();
+            userInfo.passWord = pass;
+            this.ed_username_reg.setString("");
+            this.ed_nickname_reg.setString("");
+            this.ed_pass_reg.setString("");
+            this.ed_captcha.setString("");
+
+            userInfo.Info.nickname = info.Alias;
+            userInfo.Info.accessToken = info.Token;
+            userInfo.Info.zoMoney = info.Coin;
+            userInfo.Info.xuMoney = info.Gold;
+
+
+            intoHallScene();
+            loginscene.SignIn.setVisible(false);
+            this.destroyBase();
+        },
+
         destroyBase : function (){
-            this.removeAllChildren(true);
-            loginscene.signUp = null;
+            this.runAction((cc.sequence(cc.scaleTo(0.1, 1.1), cc.delayTime(0.1), cc.scaleTo(0.15,0), cc.callFunc(function(){
+                loginscene.signUp.removeAllChildren(true);
+                loginscene.signUp = null;
+                captcha_base.destroySceneCaptcha();
+            }))));
         }
     }
 )

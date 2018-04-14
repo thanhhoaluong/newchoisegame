@@ -77,7 +77,7 @@ var res_Avatar = "res/Avatar/";
 
 var DON_VI_TIEN_THAT = "Zo";
 var DON_VI_TIEN_TANG = "Xu";
-var TEN_GAME = "ZIK";
+var TEN_GAME = "Zoday";
 var Type_Web = browserName();
 
 var sendRequest = function (url, params, isPost, callback, errorcallback, callbackHead) {

@@ -40,7 +40,6 @@ var LoginScene = BaseLayer.extend(
         ctor: function () {
             this.signUp = null;
             this.arrItemSlots = [];
-            this.conectsocket = null;
             this.platform = null;
             this._super();
             return true;
@@ -192,7 +191,7 @@ var LoginScene = BaseLayer.extend(
                 return;
             }
 
-            this.conectsocket.loginToGame(user, pass, this.platform);
+            conectsocket.loginToGame(user, pass, this.platform);
         },
 
         LoginSuccess : function(info, error){
@@ -208,15 +207,16 @@ var LoginScene = BaseLayer.extend(
             userInfo.passWord = pass;
             this.ed_username_sign.setString("");
             this.ed_pass_sign.setString("");
+            userInfo._isSignIned = true;
 
             userInfo.Info.nickname = info.Alias;
             userInfo.Info.accessToken = info.Token;
             userInfo.Info.zoMoney = info.Coin;
             userInfo.Info.xuMoney = info.Gold;
 
-
             intoHallScene();
             this.SignIn.setVisible(false);
+            this.changeBottomWhenSignIn();
         },
 
         addRegisterScene : function(){
@@ -227,9 +227,9 @@ var LoginScene = BaseLayer.extend(
         },
 
         connectSocketClient : function(){
-            if(this.conectsocket == null){
-                this.conectsocket = new ConectSocketClient(this)
-                this.addChild(this.conectsocket);
+            if(conectsocket == null){
+                conectsocket = new ConectSocketClient(this)
+                this.addChild(conectsocket);
             }
         },
 
@@ -253,6 +253,8 @@ var LoginScene = BaseLayer.extend(
     }
 )
 
+var captcha_base = null;
+var conectsocket = null;
 
 LoginScene.BTN_SIGN_IN = 1;
 LoginScene.BTN_REGISTER = 2;

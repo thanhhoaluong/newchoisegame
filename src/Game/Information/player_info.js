@@ -7,6 +7,8 @@ var Player_Info = BaseLayerTable.extend(
             this._super("playerInfo");
             this._gotoTab = gototab;
             this.hscn = null;
+            this.bmtk = null;
+            this.lsgd = null;
             this.title = null;
             return true;
         },
@@ -37,11 +39,16 @@ var Player_Info = BaseLayerTable.extend(
 
         onClickTab: function (tabIndex, index) {
             if (index == 0) {
+                this.RemoveChildInTab();
                 this.gotoHoSo();
             } else if (index == 1) {
                 cc.log("2");
+                this.RemoveChildInTab();
+                this.gotoSercurity();
             } else if (index == 2) {
                 cc.log("3");
+                this.RemoveChildInTab();
+                this.gotoHistoryTranfer();
             }
         },
 
@@ -49,6 +56,28 @@ var Player_Info = BaseLayerTable.extend(
             if(this.hscn == null){
                 this.hscn = new HoSoCaNhan(this);
                 this.addChild(this.hscn);
+            }
+        },
+
+        gotoSercurity : function(){
+            if(this.bmtk == null){
+                this.bmtk = new Sercurity(this);
+                this.addChild(this.bmtk);
+            }
+        },
+
+        gotoHistoryTranfer : function(){
+            if(this.lsgd == null){
+                this.lsgd = new HistoryTranfer(this);
+                this.addChild(this.lsgd);
+            }
+        },
+
+        RemoveChildInTab : function(){
+            if(this.hscn != null){
+                this.hscn.removeAllChildren();
+                this.hscn.removeFromParent(true);
+                this.hscn = null;
             }
         },
     }

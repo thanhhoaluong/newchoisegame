@@ -55,12 +55,15 @@
     "src/Game/Network/ResponsePortal.js",
     "src/Game/Alert/alert.js",
     "src/Game/HallScene/signUp.js",
+    "src/Game/HallScene/getCaptcha.js",
     "src/Game/HallScene/ItemSlot.js",
     "src/Game/HallScene/signIn.js",
     "src/Game/HallScene/hallscene.js",
     "src/Game/HallScene/conectSocketClient.js",
 
     "src/Game/Information/player_info.js",
-    "src/Game/Information/hosocanhan.js"
+    "src/Game/Information/hosocanhan.js",
+    "src/Game/Information/sercurity.js",
+    "src/Game/Information/historyTranfer.js"
   ]
 }

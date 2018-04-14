@@ -21,8 +21,8 @@ var ShowAlert = BaseLayer.extend(
 
             this.createText(this.ShowAlert, "lb_content", cc.p(764, 400), "", fontTahoma.fontName, 20);
             this.lb_content.ignoreContentAdaptWithSize(false);
-            this.lb_content.setContentSize(cc.size(400, 250));
-            this.lb_content.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+            this.lb_content.setContentSize(cc.size(500, 250));
+            this.lb_content.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_TOP);
             this.lb_content.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
             this.createButton(this.ShowAlert,"bt_ok",ShowAlert.BTN_OK,cc.p(893,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
@@ -84,7 +84,7 @@ var ShowAlert = BaseLayer.extend(
 
         showBackground : function(){
             this.setVisible(true);
-            this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.05, 1.1), cc.delayTime(0.1), cc.scaleTo(0.1,1))));
+            this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1))));
         }
     }
 )
