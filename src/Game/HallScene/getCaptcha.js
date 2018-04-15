@@ -16,6 +16,7 @@ var Captcha = BaseLayer.extend(
         },
 
         getCatpcha : function(){
+            getConection(MODULE_PORTAL);
             var url = CmdgetCaptcha();
             conectsocket.gameClient.send(url);
         },

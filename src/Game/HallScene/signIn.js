@@ -190,7 +190,8 @@ var LoginScene = BaseLayer.extend(
                 showAlam(0, "Bạn chưa nhập mật khẩu hoặc nhập sai mật khẩu!", null);
                 return;
             }
-
+            getConection(MODULE_PORTAL);
+            cc.log("stt server: = " + findSocket(MODULE_PORTAL));
             conectsocket.loginToGame(user, pass, this.platform);
         },
 
@@ -227,8 +228,9 @@ var LoginScene = BaseLayer.extend(
         },
 
         getConfig : function(){
+            sceneMgr.addLoading("Đang tải dữ liệu!");
             var url = urlGetConfig()
-            sendRequest(url, null, false, this.callbackGetConfig, this.callBackError);
+            sendRequest(url, null, false, this.callbackGetConfig, this.callBackErrorGetAPI);
         },
 
         callbackGetConfig : function(response){
@@ -242,19 +244,27 @@ var LoginScene = BaseLayer.extend(
             configMyGame.urlUpdate = jsonData["urlUpd"];
             configMyGame.urlResource = jsonData["urlRes"];
 
-            //openSocketServer();
-           // return;
-            loginscene.connectSocketClient();
+            loginscene.openSocketServer();
+            sceneMgr.clearLoading();
         },
 
-        callbackError : function(){
-            showAlam(0, "Hệ thống tạm thời gián đoạn. Vui lòng quay lại sau", null);
+        callBackErrorGetAPI : function(){
+            sceneMgr.addLoading("Xảy ra lỗi. Vui lòng quay lại sau!");
         },
 
         connectSocketClient : function(){
             if(conectsocket == null){
                 conectsocket = new ConectSocketClient(this)
                 this.addChild(conectsocket);
+            }
+        },
+
+        openSocketServer : function(){
+            for(var i =0; i < configMyGame.servers.length; i++){
+                var conection = null;
+                conection = new ConectSocketClient(this)
+                this.addChild(conection);
+                this["conection" + configMyGame.servers[i].sId] = conection;
             }
         },
 
@@ -274,6 +284,15 @@ var LoginScene = BaseLayer.extend(
                 this.bt_payment.setPosition(cc.p(1007,this.bt_payment.getPositionY()));
                 this.bt_email.setVisible(true);
             }
+        },
+
+        tesstham1 : function(){
+            var str = "ok ok 1";
+            return str;
+        },
+
+        tesstham2 : function(){
+            var res = await
         },
     }
 )

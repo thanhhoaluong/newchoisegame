@@ -119,13 +119,15 @@ var SignUp = BaseLayer.extend(
                 str = "Password trong khoảng từ 6 - 16 ký tự!";
             } else if (password == username) {
                 str = "Mật khẩu không được trùng với Tên tài khoản!";
+            }else if (!checkPassword(password)) {
+                str = "Mật khẩu bao gồm cả số và chữ!";
             } else if (username == nickname) {
                 str = "Tên nhân vật không được trùng với Tên tài khoản!";
             } else if (this.ckb_reg.isSelected() == false) {
                 str = "Vui lòng đọc và đồng ý với các điều khoản của " + TEN_GAME + "!";
             } else if (captcha == "" || captcha == null) {
                 str = "Mã xác nhận không chính xác!";
-            }else if (pass != repass) {
+            }else if (password != repass) {
                 str = "Nhập lại mật khẩu không trùng với mật khẩu!";
             }
 
@@ -133,7 +135,7 @@ var SignUp = BaseLayer.extend(
                 showAlam(0, str, null);
                 return;
             }
-
+            getConection(MODULE_PORTAL);
             var url = CmdSendRegister(username, password, captcha , loginscene.platform);
             conectsocket.gameClient.send(url);
         },

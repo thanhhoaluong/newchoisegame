@@ -17,18 +17,18 @@ var ControlerTableFrame  = ccui.Layout.extend(
             this.setContentSize(cc.size(1000,40));
             this.setAnchorPoint(0.5 , 0.5);
             var texType = ccui.Widget.LOCAL_TEXTURE;
-            if (cc.spriteFrameCache.getSpriteFrame("res/Minigame/ImageChung/number.png")) {
+            if (cc.spriteFrameCache.getSpriteFrame(res_TableGui + "totalPage.png")) {
                 texType = ccui.Widget.PLIST_TEXTURE;
             }
             this._btnBackAll = new ccui.Button();
-            this._btnBackAll.loadTextures("res/Minigame/ImageChung/number_backall.png", "res/Minigame/ImageChung/number_backall_s.png", "res/Minigame/ImageChung/number_backall_s.png", texType);
+            this._btnBackAll.loadTextures(res_TableGui + "bt_backAllPage.png", res_TableGui + "bt_backAllPage_s.png", res_TableGui + "bt_backAllPage_s.png", texType);
             this._btnBackAll.setPosition(350,30);
             this.addChild(this._btnBackAll);
             this._btnBackAll.addTouchEventListener(this.onTouchEventHandler, this);
             this._btnBackAll.setTag(0);
 
             this._btnBack = new ccui.Button();
-            this._btnBack.loadTextures("res/Minigame/ImageChung/number_back.png", "res/Minigame/ImageChung/number_back_s.png", "res/Minigame/ImageChung/number_back_s.png", texType);
+            this._btnBack.loadTextures(res_TableGui + "bt_backPage.png", res_TableGui + "bt_backPage_s.png", res_TableGui + "bt_backPage_s.png", texType);
             this._btnBack.setPosition(415,30);
             this.addChild(this._btnBack);
             this._btnBack.addTouchEventListener(this.onTouchEventHandler, this);
@@ -36,10 +36,10 @@ var ControlerTableFrame  = ccui.Layout.extend(
 
             if(texType == ccui.Widget.PLIST_TEXTURE)
             {
-                this._bgPage = new cc.Sprite("#res/Minigame/ImageChung/number.png");
+                this._bgPage = new cc.Sprite("#res/TableGui/totalPage.png");
             }else
             {
-                this._bgPage = new cc.Sprite("res/Minigame/ImageChung/number.png");
+                this._bgPage = new cc.Sprite("res/TableGui/totalPage.png");
             }
             this._bgPage.setPosition(500,30);
             this.addChild(this._bgPage);
@@ -55,7 +55,7 @@ var ControlerTableFrame  = ccui.Layout.extend(
             this.addChild(this._lbPage);
 
             this._btnNext = new ccui.Button();
-            this._btnNext.loadTextures("res/Minigame/ImageChung/number_back.png", "res/Minigame/ImageChung/number_back_s.png", "res/Minigame/ImageChung/number_back_s.png", texType);
+            this._btnNext.loadTextures(res_TableGui + "bt_backPage.png", res_TableGui + "bt_backPage_s.png", res_TableGui + "bt_backPage_s.png", texType);
             this._btnNext.setPosition(585,30);
             this.addChild(this._btnNext);
             this._btnNext.addTouchEventListener(this.onTouchEventHandler, this);
@@ -63,7 +63,7 @@ var ControlerTableFrame  = ccui.Layout.extend(
             this._btnNext.setTag(2);
 
             this._btnNextAll = new ccui.Button();
-            this._btnNextAll.loadTextures("res/Minigame/ImageChung/number_backall.png", "res/Minigame/ImageChung/number_backall_s.png", "res/Minigame/ImageChung/number_backall_s.png", texType);
+            this._btnNextAll.loadTextures(res_TableGui + "bt_backAllPage.png", res_TableGui + "bt_backAllPage_s.png", res_TableGui + "bt_backAllPage_s.png", texType);
             this._btnNextAll.setPosition(650,30);
             this.addChild(this._btnNextAll);
             this._btnNextAll.addTouchEventListener(this.onTouchEventHandler, this);

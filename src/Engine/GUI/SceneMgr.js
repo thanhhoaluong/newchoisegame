@@ -256,7 +256,7 @@ var Loading = cc.Layer.extend({
             this._layerColor = new cc.LayerColor(cc.BLACK);
             this._layerColor.setOpacity(0)
             this._layerColor.runAction(cc.fadeTo(.25, 150));
-           //this.addChild(this._layerColor);
+           this.addChild(this._layerColor);
         }
 
         this.sload1 = null;
@@ -265,14 +265,8 @@ var Loading = cc.Layer.extend({
         this.sload4 = null;
         this.sloadw = null;
         this.sloadc = null;
-        // cc.log("ctor2");
-    },
-
-    timeout: function (time) {
-        //Phu test
-        // cc.log("run Phu test timeout");
-        //this.runAction(cc.sequence(cc.delayTime(time), cc.hide()));
-        //this.runAction(cc.sequence(cc.delayTime(time), cc.removeSelf()));
+        this.onEnter();
+        return true;
     },
 
     onEnter: function () {
@@ -280,7 +274,7 @@ var Loading = cc.Layer.extend({
 
         var pn_layout = new ccui.Layout();
         pn_layout.setAnchorPoint(0.5, 0.5);
-        pn_layout.setContentSize(cc.size(1920, 1080));
+        pn_layout.setContentSize(cc.size(1920, 1280));
         pn_layout.setTouchEnabled(true);
         pn_layout.setCascadeOpacityEnabled(true);
         pn_layout.setPosition(cc.p(640, 360));
@@ -292,37 +286,37 @@ var Loading = cc.Layer.extend({
         pn_layout.setBackGroundColorOpacity(180);
         // cc.log("onEnter0");
         //test
-        var bg = new cc.Sprite("res/LoadingUI/bg_load.png");
+        var bg = new cc.Sprite("res/DownloadUI/bg_load.png");
         bg.setPosition(this.size.width / 2, this.size.height / 2 + 15);
         this.addChild(bg);
 
-        this.sload1 = new cc.Sprite("res/LoadingUI/loading_p.png");
+        this.sload1 = new cc.Sprite("res/DownloadUI/loading_p.png");
         this.sload1.setScale(0.7);
         this.sload1.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sload1);
 
-        this.sload2 = new cc.Sprite("res/LoadingUI/loading_p.png");
+        this.sload2 = new cc.Sprite("res/DownloadUI/loading_p.png");
         this.sload2.setScale(0.7);
         this.sload2.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sload2);
 
-        this.sload3 = new cc.Sprite("res/LoadingUI/loading_p.png");
+        this.sload3 = new cc.Sprite("res/DownloadUI/loading_p.png");
         this.sload3.setScale(0.7);
         this.sload3.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sload3);
 
-        this.sload4 = new cc.Sprite("res/LoadingUI/loading_p.png");
+        this.sload4 = new cc.Sprite("res/DownloadUI/loading_p.png");
         this.sload4.setVisible(true);
         this.sload4.setScale(0.7);
         this.sload4.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sload4);
 
-        this.sloadc = new cc.Sprite("res/LoadingUI/loading_c.png");
+        this.sloadc = new cc.Sprite("res/DownloadUI/loading_c.png");
         this.sloadc.setVisible(false);
         this.sloadc.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sloadc);
 
-        this.sloadw = new cc.Sprite("res/LoadingUI/loading_pw.png");
+        this.sloadw = new cc.Sprite("res/DownloadUI/loading_pw.png");
         this.sloadw.setScale(0);
         this.sloadw.setPosition(this.size.width / 2, this.size.height / 2 + 40);
         this.addChild(this.sloadw);
@@ -331,20 +325,6 @@ var Loading = cc.Layer.extend({
 
         this.animateLoad();
 
-        //for (var i = 0; i < 5; i++) {
-        //    this.test = new cc.Sprite("res/LoadingUI/loadingCircle.png");
-        //    var y = this.test.getContentSize().height / 2;
-        //    this.test.setPositionY(this.size.height - 6);
-        //    this.test.setPositionX(0)
-        //    this.addChild(this.test);
-        //
-        //    if(!cc.sys.isNative)
-        //    {
-        //        this.test.setVisible(false);
-        //    }
-        //    this.test.runAction(cc.repeatForever(cc.sequence(cc.delayTime(i * .125), engine.CircleMove.create(2, this.size.width / 2), cc.delayTime((5 - i) * .125))));
-        //}
-
         var scale = cc.director.getWinSize().width / 1280;
         scale = (scale > 1) ? 1 : scale;
 
@@ -352,7 +332,7 @@ var Loading = cc.Layer.extend({
         this._label = new ccui.Text();
         // cc.log("onEnter2.2");
         this._label.setAnchorPoint(cc.p(0.5, 0.5));
-        //this._label.setFontName("res/LoadingUI/fonts/tahoma.ttf");
+        //this._label.setFontName("res/DownloadUI/fonts/tahoma.ttf");
         this._label.setFontName(fontArialB.fontName);
         this._label.setFontSize(23);
         this._label.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);

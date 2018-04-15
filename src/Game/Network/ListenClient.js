@@ -10,6 +10,7 @@ var GameListener = cc.Class.extend(
              cc.log("Connect Socket " + isSuccess);
             conectSocketClient = isSuccess;
             if (isSuccess) {
+                getConection(MODULE_PORTAL);
                 conectsocket.clearReconnectSocket();
                 this.gameWsState = CLIENT_STATE.CONNECTED;
             } else {

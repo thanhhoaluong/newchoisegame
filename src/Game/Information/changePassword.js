@@ -112,6 +112,8 @@ var ChangePassword = BaseLayer.extend(
                 str = "Mật khẩu quá đơn giản. Vui lòng nhập lại!";
             } else if (newpass == "") {
                 str = "Bạn chưa nhập mật khẩu mới!";
+            }else if (!checkPassword(newpass)) {
+                str = "Mật khẩu bao gồm cả số và chữ!";
             } else if (oldpass == newpass) {
                 str = "Mật khẩu mới giống mật khẩu hiện tại của bạn!";
             } else if (renewpass == "" || newpass != renewpass) {
@@ -123,18 +125,21 @@ var ChangePassword = BaseLayer.extend(
                 return;
             }
 
+            getConection(MODULE_PORTAL);
             var url = CmdChangePassword(oldpass, newpass, captcha);
             conectsocket.gameClient.send(url);
         },
 
         changePassSuccess : function(data, error){
             cc.log("change pass = " + data + " loi = " + error);
+            var newpass = this.ed_new_pass.getString();
             if(error != ""){
                 showAlam(0, error, null);
                 return;
             }
 
             if(data != ""){
+                userInfo.passWord = newpass;
                 showAlam(0, data, null);
                 this.destroyBase();
             }

@@ -13,6 +13,7 @@ var HistoryTranfer = BaseLayer.extend(
             cc.log("HistoryTranfer");
             this.createTabView();
             this.createContentListView();
+            this.createControlView();
         },
 
         createTabView: function () {
@@ -24,13 +25,20 @@ var HistoryTranfer = BaseLayer.extend(
         },
 
         createContentListView: function () {
-            this._pContent = new DataViewFrame(this, cc.size(1074, 450), HistoryTranfer.dataColumn);
+            this._pContent = new DataViewFrame(this, cc.size(1074, 400), HistoryTranfer.dataColumn);
             this._pContent.setAnchorPoint(0.5, 0.5);
-            this._pContent.setPosition(cc.p(640, 276));
+            this._pContent.setPosition(cc.p(640, 301));
             this.addChild(this._pContent);
 
 
             this._pContent.setData(HistoryTranfer.dataFuck);
+        },
+
+        createControlView: function () {
+            this._pControl = new ControlerTableFrame(this, 1);
+            this._pControl.setAnchorPoint(0.5, 0.5);
+            this._pControl.setPosition(cc.p(640, 66));
+            this.addChild(this._pControl);
         },
 
         onClickTabOtherFrame : function(tabIndex, index){
@@ -61,6 +69,55 @@ var HistoryTranfer = BaseLayer.extend(
 )
 HistoryTranfer.dataFuck = [
     {
+        chitiet : "",
+        currentMoney :"9.814.427",
+        description : "Phòng: 43, Bàn: 434",
+        description1:"Phòng: 43, Bàn: 434",
+        moneyExchange:"-500",
+        serviceName:"Chơi game Poker",
+        transId :42791,
+        transactionTime :"2018-04-13 15:20:16",
+    },
+    {
+        chitiet : "",
+        currentMoney :"9.814.427",
+        description : "Phòng: 43, Bàn: 434",
+        description1:"Phòng: 43, Bàn: 434",
+        moneyExchange:"-500",
+        serviceName:"Chơi game Poker",
+        transId :42791,
+        transactionTime :"2018-04-13 15:20:16",
+    },
+    {
+        chitiet : "",
+        currentMoney :"9.814.427",
+        description : "Phòng: 43, Bàn: 434",
+        description1:"Phòng: 43, Bàn: 434",
+        moneyExchange:"-500",
+        serviceName:"Chơi game Poker",
+        transId :42791,
+        transactionTime :"2018-04-13 15:20:16",
+    },
+    {
+        chitiet : "",
+        currentMoney :"9.814.427",
+        description : "Phòng: 43, Bàn: 434",
+        description1:"Phòng: 43, Bàn: 434",
+        moneyExchange:"-500",
+        serviceName:"Chơi game Poker",
+        transId :42791,
+        transactionTime :"2018-04-13 15:20:16",
+    },
+    {
+        chitiet : "Xem",
+        currentMoney :"9.814.427",
+        description : "Phòng: 43, Bàn: 434",
+        description1:"Phòng: 43, Bàn: 434",
+        moneyExchange:"-500",
+        serviceName:"Chơi game Poker",
+        transId :42791,
+        transactionTime :"2018-04-13 15:20:16",
+    },{
         chitiet : "",
         currentMoney :"9.814.427",
         description : "Phòng: 43, Bàn: 434",

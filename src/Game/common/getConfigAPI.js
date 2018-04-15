@@ -12,8 +12,14 @@ var urlGetConfig = function(){
 function findSocket (MODULE){
     for(var i = 0; i < configMyGame.module.length; i++){
         if(MODULE == configMyGame.module[i].i){
-            var serverID = configMyGame.module[i].sId;
+            return serverID = configMyGame.module[i].sId;
             break;
         }
     }
+}
+function getConection (MODULE){
+    if(loginscene == null)
+        return;
+    var sID = findSocket(MODULE);
+    conectsocket = loginscene["conection" + sID];
 }

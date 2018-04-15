@@ -501,6 +501,14 @@ formartDateTimeCompact = function (date) {
     return str;
 }
 
+var checkPassword = function(password){
+    if(password.match(/\d/) && password.match(/[a-zA-Z]/)){
+        return true;
+    }else{
+        return false;
+    }
+};
+
 var MahoaNoiDung = function (value) {
     var str = value.substr((value.length - 3), value.length);
     var str1 = value.substr(0, (value.length - 3));
