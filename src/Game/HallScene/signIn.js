@@ -58,7 +58,6 @@ var LoginScene = BaseLayer.extend(
                 this.platform = "web";
             }
 
-
             this.createLogin();
             this.createBottom();
             this.createListSlot();

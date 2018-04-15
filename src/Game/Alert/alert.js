@@ -32,7 +32,23 @@ var ShowAlert = BaseLayer.extend(
             this.bt_ok.setVisible(false);
             this.bt_cancel.setVisible(false);
 
+            this.createLayout(this.ShowAlert,"pn_check_captcha",cc.p(640,360),null,cc.size(1280,720),false);
+            this.createImage(this.pn_check_captcha, "sp_captcha_check", cc.p(490,333), res_login_scene + "bg_edit_s.png", cc.size(167, 56));
+            this.createEditBox(this.pn_check_captcha,"ed_captcha_check",cc.p(490,333),"","Nhập mã",fontArial.fontName,22,cc.size(147,56),null,cc.TEXT_ALIGNMENT_CENTER,6);
+            this.ed_captcha_check.setPlaceholderFontColor(cc.color.GRAY);
+            this.ed_captcha_check.setFontColor(cc.color.BLACK);
+
+            if (!cc.sys.isNative) {
+                this.ed_captcha_check.setTextAlign(cc.TEXT_ALIGNMENT_LEFT);
+            }
+
+            this.createButton(this.pn_check_captcha,"bt_refresh",ShowAlert.BTN_REFRESH,cc.p(750,333),true,res_SignUp + "b_refresh.png",res_SignUp + "b_refresh.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.pn_check_captcha,"bt_send_captcha",ShowAlert.BTN_SEND_CAPTCHA,cc.p(835,333),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
+            this.createText(this.pn_check_captcha, "lb_send_captcha", cc.p(830,333), "GỬI", fontTahomaB.fontName, 25);
+            this.bt_send_captcha.setScaleX(0.37)
+
             this.ShowAlert.setScale(0);
+            this.pn_check_captcha.setVisible(false);
             this.setVisible(false);
         },
 
@@ -53,6 +69,8 @@ var ShowAlert = BaseLayer.extend(
                 case ShowAlert.BTN_CANCEL:
                     this.destroyAlam();
                     break;
+                case ShowAlert.BTN_REFRESH:
+                    break;
 
             }
         },
@@ -71,12 +89,27 @@ var ShowAlert = BaseLayer.extend(
                 this.bt_ok.setVisible(true);
                 this.bt_cancel.setVisible(true);
                 this.bt_close.setVisible(false);
+                this.pn_check_captcha.setVisible(false);
+            }else if(kind == 2){
+                this.bt_ok.setVisible(false);
+                this.bt_cancel.setVisible(false);
+                this.bt_close.setVisible(false);
+                this.pn_check_captcha.setVisible(true);
+                this.addCaptchaAlert();
             }else{
                 this.bt_ok.setVisible(false);
                 this.bt_cancel.setVisible(false);
                 this.bt_close.setVisible(true);
+                this.pn_check_captcha.setVisible(false);
             }
             this.showBackground();
+        },
+
+        addCaptchaAlert : function (){
+            if(captcha_base == null){
+                captcha_base = new Captcha(this, 650, 333);
+                this.pn_check_captcha.addChild(captcha_base);
+            }
         },
 
         showBackground : function(){
@@ -98,4 +131,6 @@ showAlam = function (kind, content, callbackOK) {
 ShowAlert.CLOSE = 1;
 ShowAlert.BTN_OK = 2;
 ShowAlert.BTN_CANCEL = 3;
+ShowAlert.BTN_REFRESH = 4;
+ShowAlert.BTN_SEND_CAPTCHA = 5;
 
