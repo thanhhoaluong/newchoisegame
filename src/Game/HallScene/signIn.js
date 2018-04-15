@@ -58,6 +58,7 @@ var LoginScene = BaseLayer.extend(
                 this.platform = "web";
             }
 
+
             this.createLogin();
             this.createBottom();
             this.createListSlot();
@@ -284,15 +285,6 @@ var LoginScene = BaseLayer.extend(
                 this.bt_payment.setPosition(cc.p(1007,this.bt_payment.getPositionY()));
                 this.bt_email.setVisible(true);
             }
-        },
-
-        tesstham1 : function(){
-            var str = "ok ok 1";
-            return str;
-        },
-
-        tesstham2 : function(){
-            var res = await
         },
     }
 )

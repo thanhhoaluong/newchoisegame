@@ -6,6 +6,7 @@ var HallScene = BaseLayer.extend(
     {
         ctor: function () {
             this._super();
+            this.pn_button_setting = null;
             return true;
         },
         customizeGUI: function () {
@@ -22,7 +23,8 @@ var HallScene = BaseLayer.extend(
             this.lb_nickname.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_nickname.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 
-            this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_MenuSetting + "sp_avatar.png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
+            //this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_MenuSetting + "sp_avatar.png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_Avatar + userInfo.Info.avatar +".png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
             this.bt_avatar.setPressedActionEnabled(false);
 
             this.createImage(this.top_menu, "bg_money_zo", cc.p(545, posy), res_MenuSetting + "Top/bg_coin.png", cc.size(246, 57));
@@ -49,6 +51,7 @@ var HallScene = BaseLayer.extend(
             this.createButton(this.top_menu,"bt_add_zo",HallScene.BTN_ADD_ZO,cc.p(645,posy + 1),true,res_MenuSetting + "btn_add.png",res_MenuSetting + "btn_add.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.top_menu,"bt_add_xu",HallScene.BTN_ADD_XU,cc.p(917,posy + 1),true,res_MenuSetting + "btn_add.png",res_MenuSetting + "btn_add.png",ccui.Widget.PLIST_TEXTURE);
 
+
         },
 
         onEnter: function(){
@@ -64,6 +67,16 @@ var HallScene = BaseLayer.extend(
                 case HallScene.BTN_PLAYER_INFO:
                     addPlayerInfo();
                     break;
+                case HallScene.BTN_SETTING:
+                    this.addButtonSetting();
+                    break;
+            }
+        },
+
+        addButtonSetting : function(){
+            if(this.pn_button_setting == null){
+                this.pn_button_setting = new SMSPlus(this);
+                this.addChild(this.pn_button_setting);
             }
         },
 

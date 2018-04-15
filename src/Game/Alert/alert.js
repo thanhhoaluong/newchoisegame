@@ -15,24 +15,20 @@ var ShowAlert = BaseLayer.extend(
             this.shadow.setBackGroundColorOpacity(180);
             this.createLayout(this,"ShowAlert",cc.p(640,370),null,cc.size(1280,720),false);
 
-            this.createImage(this.ShowAlert, "bg_alert", cc.p(640, 388), res_SignUp + "bg_signUp.png", cc.size(801, 534));
-            this.createImage(this.ShowAlert, "txl_alert", cc.p(742, 579), res_login_scene + "tle_alert.png", cc.size(207, 43));
-            this.createButton(this.ShowAlert,"bt_close",ShowAlert.CLOSE,cc.p(1000,579),true,res_SignUp + "b_close.png",res_SignUp + "b_close.png",ccui.Widget.PLIST_TEXTURE);
+            this.createImage(this.ShowAlert, "bg_alert", cc.p(640, 396), res_TableGui + "bg_alert.png", cc.size(543, 230));
+            this.createImage(this.ShowAlert, "txl_alert", cc.p(640, 474), res_login_scene + "tle_alert.png", cc.size(207, 43));
+            this.createButton(this.ShowAlert,"bt_close",ShowAlert.CLOSE,cc.p(876,471),true,res_SignUp + "b_close.png",res_SignUp + "b_close.png",ccui.Widget.PLIST_TEXTURE);
 
-            this.createText(this.ShowAlert, "lb_content", cc.p(764, 400), "", fontTahoma.fontName, 20);
+            this.createText(this.ShowAlert, "lb_content", cc.p(640, 396), "", fontTahoma.fontName, 20);
             this.lb_content.ignoreContentAdaptWithSize(false);
-            this.lb_content.setContentSize(cc.size(500, 250));
-            this.lb_content.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_TOP);
+            this.lb_content.setContentSize(cc.size(500, 75));
+            this.lb_content.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_content.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
-            this.createButton(this.ShowAlert,"bt_ok",ShowAlert.BTN_OK,cc.p(893,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
-            this.createText(this.bt_ok, "lb_ok", cc.p(this.bt_ok.width/2, this.bt_ok.height/2), "ĐỒNG Ý", fontTahomaB.fontName, 25);
+            this.createButton(this.ShowAlert,"bt_ok",ShowAlert.BTN_OK,cc.p(542,333),true,res_TableGui + "bt_ok.png",res_TableGui + "bt_ok.png",ccui.Widget.PLIST_TEXTURE);
 
-            this.createButton(this.ShowAlert,"bt_cancel",ShowAlert.BTN_CANCEL,cc.p(620,171),true,res_SignUp + "b_create.png",res_SignUp + "b_create.png",ccui.Widget.PLIST_TEXTURE);
-            this.createText(this.bt_cancel, "lb_cancel", cc.p(this.bt_cancel.width/2, this.bt_cancel.height/2), "THOÁT", fontTahomaB.fontName, 25);
+            this.createButton(this.ShowAlert,"bt_cancel",ShowAlert.BTN_CANCEL,cc.p(754,333),true,res_TableGui + "bt_cancel.png",res_TableGui + "bt_cancel.png",ccui.Widget.PLIST_TEXTURE);
 
-            this.bt_ok.setScaleX(0.7);
-            this.bt_cancel.setScaleX(0.7);
             this.bt_ok.setVisible(false);
             this.bt_cancel.setVisible(false);
 
