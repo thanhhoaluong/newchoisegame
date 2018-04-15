@@ -24,8 +24,9 @@ var HallScene = BaseLayer.extend(
             this.lb_nickname.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 
             //this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_MenuSetting + "sp_avatar.png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
-            this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_Avatar + userInfo.Info.avatar +".png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
+            this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_Avatar + userInfo.Info.avatar +".png",res_Avatar + userInfo.Info.avatar +".png",ccui.Widget.PLIST_TEXTURE);
             this.bt_avatar.setPressedActionEnabled(false);
+            this.bt_avatar.setScale(0.38)
 
             this.createImage(this.top_menu, "bg_money_zo", cc.p(545, posy), res_MenuSetting + "Top/bg_coin.png", cc.size(246, 57));
             this.createImage(this.top_menu, "bg_money_xu", cc.p(817, posy), res_MenuSetting + "Top/bg_xu.png", cc.size(245, 57));
@@ -75,7 +76,7 @@ var HallScene = BaseLayer.extend(
 
         addButtonSetting : function(){
             if(this.pn_button_setting == null){
-                this.pn_button_setting = new SMSPlus(this);
+                this.pn_button_setting = new LayoutSetting(this);
                 this.addChild(this.pn_button_setting);
             }
         },
