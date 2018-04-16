@@ -1,2 +1,2 @@
-# xc-client
-xeng.club client
+# gamenew
+client
