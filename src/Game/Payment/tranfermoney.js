@@ -102,7 +102,7 @@ var TranferMoney = BaseLayer.extend(
             this.bt_tranfer.setTitleFontName(fontTahomaB.fontName);
             this.bt_tranfer.setTitleFontSize(25);
 
-            this.createListView(this, "lv_content", cc.p(940, 334), cc.size(510, 350));
+            this.createListView(this, "lv_content", cc.p(940, 334), cc.size(510, 350)); 
             this.lv_content.setScrollBarEnabled(false);
             this.lv_content.setTouchEnabled(false);
             this.lv_content.setScrollBarEnabled(false);
