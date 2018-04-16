@@ -74,6 +74,7 @@ var res_ListGame = "res/ListGame/";
 var res_TableGui = "res/TableGui/";
 var res_HoSo = "res/HoSo/";
 var res_Avatar = "res/Avatar/";
+var res_Payment = "res/Payment/";
 
 var DON_VI_TIEN_THAT = "ZO";
 var DON_VI_TIEN_TANG = "XU";

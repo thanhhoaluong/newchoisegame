@@ -175,6 +175,13 @@ var LoginScene = BaseLayer.extend(
                 case LoginScene.BTN_SIGN_IN:
                     this.callLogin();
                     break;
+                case LoginScene.BTN_PAYMENT:
+                    if(userInfo._isSignIned == false) {
+                        showAlam(0, "Vui lòng đăng nhập vào game!", null);
+                        return;
+                    }
+                    addPayment("addmoney");
+                    break;
             }
         },
 

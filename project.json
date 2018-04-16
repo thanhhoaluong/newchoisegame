@@ -72,6 +72,13 @@
     "src/Game/Information/Sercurity/smsplus.js",
     "src/Game/Information/Sercurity/baomatdangnhap.js",
     "src/Game/Information/Sercurity/ketsat.js",
-    "src/Game/Information/historyTranfer.js"
+    "src/Game/Information/historyTranfer.js",
+
+    "src/Game/Payment/payment.js",
+    "src/Game/Payment/addmoney.js",
+    "src/Game/Payment/cashmoney.js",
+    "src/Game/Payment/tranfermoney.js",
+
+    "src/Game/Guild/Huongdan.js"
   ]
 }

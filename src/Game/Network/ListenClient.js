@@ -20,10 +20,12 @@ var GameListener = cc.Class.extend(
             }
         },
         onDisconnected: function () {
-             cc.log(" Disconnect connect socket" );
+            cc.log(" Disconnect connect socket" );
+            hallscene.destroyHallScene();
             conectSocketClient = false;
 
             this.gameWsState = CLIENT_STATE.NOT_CONNECTED;
+
             //popup.openCountdownAlert(15000, Minigame.reconnectSocket, Minigame);
         },
 
