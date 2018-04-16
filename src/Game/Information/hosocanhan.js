@@ -8,6 +8,7 @@ var HoSoCaNhan = BaseLayer.extend(
         ctor: function () {
             this._super();
             this.changePass = null;
+            this.avatar_select = null;
             return true;
         },
         customizeGUI: function () {
@@ -180,7 +181,9 @@ var HoSoCaNhan = BaseLayer.extend(
             }
 
             this["sp_checkGreen_" + stt].setVisible(true);
+            this.avatar_select = stt;
         },
+
 
         onButtonRelease: function (button, id) {
             switch (id) {
@@ -192,8 +195,6 @@ var HoSoCaNhan = BaseLayer.extend(
                     break;
                 case HoSoCaNhan.BTN_UPDATE_AVATAR:
                     this.updateAvatarUser();
-                    this.HoSoCaNhan.setVisible(true);
-                    this.pnavatar.removeAllChildren();
                     break;
                 case HoSoCaNhan.BTN_CHANGE_PASS:
                     this.addChangePassword();
@@ -214,7 +215,23 @@ var HoSoCaNhan = BaseLayer.extend(
         },
 
         updateAvatarUser : function(){
-            cc.log("update avatar User");
+            getConection(MODULE_PORTAL);
+            var url = CmdChangeAvatar(this.avatar_select);
+            conectsocket.gameClient.send(url);
+        },
+
+        updateAvatarSucces : function(data, error){
+            cc.log("change avatar = " + data + " loi = " + error);
+            this.HoSoCaNhan.setVisible(true);
+            this.pnavatar.removeAllChildren();
+            if(error != ""){
+                showAlam(0, error, null);
+                return;
+            }
+
+            if(data != ""){
+                userInfo.Info.avatar = data;
+            }
         },
 
         onEnter: function(){

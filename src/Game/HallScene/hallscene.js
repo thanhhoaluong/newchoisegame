@@ -26,7 +26,7 @@ var HallScene = BaseLayer.extend(
             //this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_MenuSetting + "sp_avatar.png",res_MenuSetting + "sp_avatar.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.top_menu,"bt_avatar",HallScene.BTN_PLAYER_INFO,cc.p(185, posy + 2),true,res_Avatar + userInfo.Info.avatar +".png",res_Avatar + userInfo.Info.avatar +".png",ccui.Widget.PLIST_TEXTURE);
             this.bt_avatar.setPressedActionEnabled(false);
-            this.bt_avatar.setScale(0.38)
+            this.bt_avatar.setScale(0.38);
 
             this.createImage(this.top_menu, "bg_money_zo", cc.p(545, posy), res_MenuSetting + "Top/bg_coin.png", cc.size(246, 57));
             this.createImage(this.top_menu, "bg_money_xu", cc.p(817, posy), res_MenuSetting + "Top/bg_xu.png", cc.size(245, 57));
@@ -51,8 +51,6 @@ var HallScene = BaseLayer.extend(
             this.createButton(this.top_menu,"bt_setting",HallScene.BTN_SETTING,cc.p(1162,posy),true,res_MenuSetting + "btn_menu.png",res_MenuSetting + "btn_menu.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.top_menu,"bt_add_zo",HallScene.BTN_ADD_ZO,cc.p(645,posy + 1),true,res_MenuSetting + "btn_add.png",res_MenuSetting + "btn_add.png",ccui.Widget.PLIST_TEXTURE);
             this.createButton(this.top_menu,"bt_add_xu",HallScene.BTN_ADD_XU,cc.p(917,posy + 1),true,res_MenuSetting + "btn_add.png",res_MenuSetting + "btn_add.png",ccui.Widget.PLIST_TEXTURE);
-
-
         },
 
         onEnter: function(){
@@ -66,7 +64,7 @@ var HallScene = BaseLayer.extend(
                     showAlam(1, "Bạn muốn thoát khỏi game!", hallscene.destroyHallScene);
                     break;
                 case HallScene.BTN_PLAYER_INFO:
-                    addPlayerInfo();
+                    addPlayerInfo("hscn");
                     break;
                 case HallScene.BTN_SETTING:
                     this.addButtonSetting();

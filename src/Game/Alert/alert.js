@@ -3,6 +3,7 @@ var ShowAlert = BaseLayer.extend(
     {
         ctor: function () {
             this.callbackOK = null;
+            this._kind = null;
             this._super();
 
             return true;
@@ -80,10 +81,13 @@ var ShowAlert = BaseLayer.extend(
             this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.1, 1.1), cc.delayTime(0.1), cc.scaleTo(0.15,0), cc.callFunc(function(){
                 showalam.setVisible(false);
             }))));
+            if(captcha_base != null)
+                captcha_base.destroySceneCaptcha();
         },
 
         designAlam : function(kind, content, callbackOK){
             this.lb_content.setString(content);
+            this._kind = kind;
             if(kind == 1){
                 this.callbackOK = callbackOK;
                 this.bt_ok.setVisible(true);
@@ -114,7 +118,10 @@ var ShowAlert = BaseLayer.extend(
 
         showBackground : function(){
             this.setVisible(true);
-            this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1), cc.delayTime(2.5), cc.callFunc(this.destroyAlam, this))));
+            if(this._kind == 1 || this._kind == 2)
+                this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1), cc.delayTime(2.5))));
+            else
+                this.ShowAlert.runAction((cc.sequence(cc.scaleTo(0.12, 1.1), cc.scaleTo(0.12,0.95), cc.scaleTo(0.12,1), cc.delayTime(2.5), cc.callFunc(this.destroyAlam, this))));
         }
     }
 )

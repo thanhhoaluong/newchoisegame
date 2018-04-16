@@ -43,6 +43,9 @@ var GameListener = cc.Class.extend(
                 case CMD_CHANGE_PASSWORD:
                     playerInfo.hscn.changePass.changePassSuccess(jsonData["d"], jsonData["m"]);
                     break;
+                case CMD_CHANGE_AVATAR:
+                    playerInfo.hscn.updateAvatarSucces(jsonData["d"], jsonData["m"]);
+                    break;
             }
 
             return;

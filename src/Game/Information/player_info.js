@@ -96,13 +96,13 @@ var Player_Info = LayerTableFrame.extend(
 
 
 
-addPlayerInfo = function () {
+addPlayerInfo = function (target) {
     if(playerInfo) {
         playerInfo.removeAllChildren();
         playerInfo.removeFromParent(true);
         playerInfo = null;
     }
-    playerInfo = new Player_Info("hscn");
+    playerInfo = new Player_Info(target);
     var curScene = SceneMgr.getInstance().getRunningScene();
     curScene.addGUI(playerInfo, BaseScene.INDEX_HALL_GUI, 1);
 };

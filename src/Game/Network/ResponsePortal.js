@@ -2,6 +2,7 @@ var CMD_LOGIN = 50;
 var CMD_REGISTER = 52;
 var CMD_CAPTCHA = 1;
 var CMD_CHANGE_PASSWORD = 54;
+var CMD_CHANGE_AVATAR = 55;
 
 var CmdSendLogin = function (username, password, des) {
     return JSON.stringify({"i":1,"c":50,"d":{"name": username,"pass": password ,"des":des}});
@@ -18,5 +19,9 @@ var CmdgetCaptcha = function () {
 
 var CmdChangePassword = function (oldpass, newpass, captcha) {
     return JSON.stringify({"i":1,"c":54,"d":{"pass":oldpass,"passNew":newpass, "captcha":captcha}});
+}
+
+var CmdChangeAvatar = function (avatar) {
+    return JSON.stringify({"i":1,"c":55,"d":avatar});
 }
 
