@@ -7,6 +7,7 @@ var HallScene = BaseLayer.extend(
         ctor: function () {
             this._super();
             this.pn_button_setting = null;
+            this.gift_game = null;
             return true;
         },
         customizeGUI: function () {
@@ -69,9 +70,24 @@ var HallScene = BaseLayer.extend(
                 case HallScene.BTN_SETTING:
                     this.addButtonSetting();
                     break;
+                case HallScene.BTN_GIFT:
+                    this.openGift();
+                    break;
             }
         },
 
+        openGift : function(){
+            if(this.gift_game != null){
+                this.gift_game.removeAllChildren()
+                this.gift_game.removeFromParent(true);
+                this.gift_game = null;
+            }
+
+            if(this.gift_game == null){
+                this.gift_game = new GiftGame(this);
+                this.addChild(this.gift_game);
+            }
+        },
         addButtonSetting : function(){
             if(this.pn_button_setting == null){
                 this.pn_button_setting = new LayoutSetting(this);

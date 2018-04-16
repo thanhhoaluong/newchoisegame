@@ -53,6 +53,8 @@ var LayerTableFrame = BaseLayer.extend(
 
         destroyBase :function(){
             this.removeFromParent();
+            if(captcha_base != null)
+                captcha_base.destroySceneCaptcha();
             if(typeof this.setNullFromParent === 'function') this.setNullFromParent();
         },
 

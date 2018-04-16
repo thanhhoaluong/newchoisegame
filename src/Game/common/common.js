@@ -80,6 +80,7 @@ var DON_VI_TIEN_TANG = "XU";
 var MONEY_THAT = 1;
 var MONEY_TANG = 0;
 var TEN_GAME = "Zoday";
+var TEN_GAME_HOA = "ZODAY";
 
 
 var Type_Web = browserName();

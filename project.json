@@ -62,6 +62,7 @@
     "src/Game/HallScene/signIn.js",
     "src/Game/HallScene/hallscene.js",
     "src/Game/HallScene/LayoutSetting.js",
+    "src/Game/HallScene/gift.js",
     "src/Game/HallScene/conectSocketClient.js",
 
     "src/Game/Information/player_info.js",
