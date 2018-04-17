@@ -40,6 +40,7 @@ var LoginScene = BaseLayer.extend(
         ctor: function () {
             this.signUp = null;
             this.arrItemSlots = [];
+            this.arrItemMiniGame = [];
             this.platform = null;
             this._super();
             return true;
@@ -149,21 +150,38 @@ var LoginScene = BaseLayer.extend(
                     itemMiniGame.width = 220;
                     var bt_Mini = new ItemMiniGame(ListMinigame[i], cc.size(215, itemMiniGame.height));
                     bt_Mini.setTouchEnabled(true);
+                    bt_Mini.setTag(i);
                     bt_Mini.setPosition(cc.p(itemMiniGame.width/2, 3/4*itemMiniGame.height));
                     itemMiniGame.addChild(bt_Mini);
-                    //bt_Slot.addTouchEventListener(this.onTouchListMiniGame, this);
-                    this.arrItemSlots.push(bt_Mini);
+                    bt_Mini.addTouchEventListener(this.onTouchListMiniGame, this);
+                    this.arrItemMiniGame.push(bt_Mini);
 
                     if (i < ListMinigame.length - 1) {
                         var bt_Mini = new ItemMiniGame(ListMinigame[i + 1], cc.size(215, itemMiniGame.height));
                         bt_Mini.setTouchEnabled(true);
                         bt_Mini.setPosition(cc.p(itemMiniGame.width/2, 1/4*itemMiniGame.height - 5));
+                        bt_Mini.setTag(i + 1);
                         itemMiniGame.addChild(bt_Mini);
-                        //bt_Slot.addTouchEventListener(this.onTouchListMiniGame, this);
-                        this.arrItemSlots.push(bt_Mini);
+                        bt_Mini.addTouchEventListener(this.onTouchListMiniGame, this);
+                        this.arrItemMiniGame.push(bt_Mini);
                     }
                     this.list_minigame.pushBackCustomItem(itemMiniGame);
                 }
+            }
+        },
+
+        onTouchListMiniGame: function (sender, type) {
+            switch (type) {
+                case ccui.Widget.TOUCH_ENDED:
+                    if(userInfo._isSignIned == false){
+                        showAlam(0, "Vui lòng đăng nhập vào game!", null);
+                        return;
+                    }
+
+                    var gameTag = sender.getTag();
+                   // tam fix vao tai xiu
+                    addTaiXiu();
+                    break;
             }
         },
 

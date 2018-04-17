@@ -75,6 +75,8 @@ var res_TableGui = "res/TableGui/";
 var res_HoSo = "res/HoSo/";
 var res_Avatar = "res/Avatar/";
 var res_Payment = "res/Payment/";
+var res_TaiXiu = "res/TaiXiu/";
+var res_SameImage = "res/SameImage/";
 
 var DON_VI_TIEN_THAT = "ZO";
 var DON_VI_TIEN_TANG = "XU";

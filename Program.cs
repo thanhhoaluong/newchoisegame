@@ -44,7 +44,7 @@ namespace UpdateResource
 
 
         public static string strPathMiniGame = @"res/Minigame";
-        public static string strPathMiniGameTaiXiu = @"res/Minigame/TaiXiu";
+        public static string strPathMiniGameTaiXiu = @"res/TaiXiu";
         public static string strPathMiniGameBauCua = @"res/Minigame/BauCua";
         public static string strPathMiniGamePokeGo = @"res/Minigame/ResSlotBa";
         public static string strPathMiniGamePoker = @"res/Minigame/ResMiniPoker";
@@ -95,7 +95,7 @@ namespace UpdateResource
 
 
         public static string strResultMinigame = "";
-        public static string strResultMiniGameTaiXiu = "";
+        public static string strResultMiniGameTaiXiu = "res_tai_xiu";
         public static string strResultMiniGameBauCua = "";
         public static string strResultMiniGamePokeGo = "";
         public static string strResultMiniGamePoker = "";
@@ -111,7 +111,7 @@ namespace UpdateResource
 
         public static string strResult1 = "g_resources";
         public static string strResultMinigame1 = "g_resources_mn";
-        public static string strResultMiniGameTaiXiu1 = "g_resources_mn_tai_xiu";
+        public static string strResultMiniGameTaiXiu1 = "res_tai_xiu";
         public static string strResultMiniGameBauCua1 = "g_resources_mn_bau_cua";
         public static string strResultMiniGamePokeGo1 = "g_resources_mn_pokego";
         public static string strResultMiniGamePoker1 = "g_resources_mn_poker";

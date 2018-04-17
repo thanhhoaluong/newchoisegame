@@ -79,6 +79,11 @@
     "src/Game/Payment/cashmoney.js",
     "src/Game/Payment/tranfermoney.js",
 
-    "src/Game/Guild/Huongdan.js"
+    "src/Game/Guild/Huongdan.js",
+
+    "src/Game/Minigame/centerRing.js",
+    "src/Game/Minigame/MinigameBase.js",
+    "src/Game/Minigame/GameTaiXiu/gameGui/taiXiuGUI.js"
+
   ]
 }
