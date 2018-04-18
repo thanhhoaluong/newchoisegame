@@ -83,7 +83,10 @@
 
     "src/Game/Minigame/centerRing.js",
     "src/Game/Minigame/MinigameBase.js",
-    "src/Game/Minigame/GameTaiXiu/gameGui/taiXiuGUI.js"
+    "src/Game/Minigame/GameTaiXiu/gameGui/taiXiuGUI.js",
+    "src/Game/Minigame/GameTaiXiu/gameGui/dataSoiCau.js",
+    "src/Game/Minigame/GameTaiXiu/gameGui/drawCau.js",
+    "src/Game/Minigame/GameTaiXiu/gameLogic/logic_soicau.js"
 
   ]
 }

@@ -8,6 +8,7 @@ var TaiXiuGUI = MiniGameLayer.extend(
             this.arrSpriteHis = [];
             this.showChat = false;
             this.pn_chat = null;
+            this.soicau = null;
             return true;
         },
         customizeGUI: function () {
@@ -192,6 +193,9 @@ var TaiXiuGUI = MiniGameLayer.extend(
                 case TaiXiuGUI.BTN_CLOSE_CHAT:
                     this.createChat();
                     break;
+                case TaiXiuGUI.BTN_SOICAU:
+                    this.createSoiCau();
+                    break;
             }
         },
 
@@ -208,6 +212,13 @@ var TaiXiuGUI = MiniGameLayer.extend(
                     this.showChat = true;
                     this.pn_chat.setVisible(true);
                 }
+            }
+        },
+
+        createSoiCau : function(){
+            if(this.soicau == null){
+                this.soicau = new DrawCau(this);
+                this.addChild(this.soicau);
             }
         },
 
@@ -254,3 +265,6 @@ addTaiXiu = function () {
     var curScene = SceneMgr.getInstance().getRunningScene();
     curScene.addGUI(taixiu, BaseScene.INDEX_MINIGAME_GUI, centerRing.INDEX_TAI_XIU);
 };
+
+TaiXiuLogic = {};
+

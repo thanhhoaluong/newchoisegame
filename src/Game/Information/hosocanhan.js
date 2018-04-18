@@ -230,7 +230,10 @@ var HoSoCaNhan = BaseLayer.extend(
             }
 
             if(data != ""){
-                userInfo.Info.avatar = data;
+                showAlam(0, data, null);
+                userInfo.Info.avatar = this.avatar_select;
+                GuiUtility.changeSprite(this.sp_avatar, res_Avatar + this.avatar_select + ".png");
+                GuiUtility.loadButtonTextures(hallscene.bt_avatar, res_Avatar + this.avatar_select + ".png", res_Avatar + this.avatar_select + ".png", res_Avatar + this.avatar_select + ".png");
             }
         },
 

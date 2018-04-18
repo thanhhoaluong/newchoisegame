@@ -239,6 +239,7 @@ var LoginScene = BaseLayer.extend(
             userInfo.Info.accessToken = info.Token;
             userInfo.Info.zoMoney = info.Coin;
             userInfo.Info.xuMoney = info.Gold;
+            userInfo.Info.avatar = info.Avatar;
 
             intoHallScene();
             this.SignIn.setVisible(false);
