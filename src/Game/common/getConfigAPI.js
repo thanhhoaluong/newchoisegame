@@ -2,6 +2,7 @@ var BASE_URL = "http://35.198.201.207";
 var PORT = "8686";
 
 var MODULE_PORTAL = 1;
+var MODULE_CHAT = 2;
 var MODULE_TAIXIU = 100;
 var MODULE_SLOT = 200;
 

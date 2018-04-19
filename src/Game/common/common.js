@@ -4,6 +4,11 @@ var CLIENT_STATE = {
     CONNECTED: 2
 };
 
+var TYPE_CAPTCHA = {
+        GET : 0,
+        CHECK : 1,
+    };
+var LISTEN_CAPTCHA = null;
 
 var version_res = 1;
 GameSlot = {

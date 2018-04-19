@@ -61,7 +61,7 @@ var ChangePassword = BaseLayer.extend(
 
         addSceneCaptcha : function(){
             if(captcha_base == null){
-                captcha_base = new Captcha(this, 850, 260);
+                captcha_base = new Captcha(this, 850, 260, "");
                 this.pn_changePass.addChild(captcha_base);
             }
         },

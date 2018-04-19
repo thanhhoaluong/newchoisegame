@@ -9,6 +9,7 @@ var TaiXiuGUI = MiniGameLayer.extend(
             this.showChat = false;
             this.pn_chat = null;
             this.soicau = null;
+            this.numItemInListChat = null;
             return true;
         },
         customizeGUI: function () {
@@ -188,31 +189,147 @@ var TaiXiuGUI = MiniGameLayer.extend(
                     this.destroyBase();
                     break;
                 case TaiXiuGUI.BTN_CHAT:
-                    this.createChat();
+                    this.checkShowChat();
                     break;
                 case TaiXiuGUI.BTN_CLOSE_CHAT:
-                    this.createChat();
+                    this.checkShowChat();
                     break;
                 case TaiXiuGUI.BTN_SOICAU:
                     this.createSoiCau();
                     break;
+                case TaiXiuGUI.BTN_SEND_CHAT:
+                    this.sendChatToServer();
+                    break;
+            }
+        },
+        sendChatToServer : function(){
+            var content = this.ed_chat.getString();
+            if(content == "" || content == null || content == undefined)
+                return;
+            getConection(MODULE_CHAT);
+            var url = CmdSendChat(content);
+            conectsocket.gameClient.send(url);
+            this.ed_chat.setString("");
+        },
+
+        sendChatSuccess : function (data, error){
+            if(error != ""){
+                showAlam(0, error, null);
+                return;
+            }
+            var txtnick = data[0].a + ":";
+            var nickname = new cc.LabelTTF(txtnick, fontTahomaB.fontName, 15, cc.size(288, 0), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+            var mes = data[0].c;
+            var lbgame = new cc.LabelTTF(mes, fontTahoma.fontName, 15, cc.size(288, 0), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+            if(data[0].a.toLowerCase() == "admin"){
+                nickname.setColor(GuiUtility.color("#ffde00"));
+                lbgame.setColor(GuiUtility.color("#90ff36"));
+            }else{
+                nickname.setColor(GuiUtility.color("#ffd200"));
+                lbgame.setColor(GuiUtility.color("#ffffff"));
+            }
+
+            var cl1 = new ccui.Layout();
+            cl1.height = nickname.height + 5 + lbgame.height;
+            cl1.width = 300;
+            nickname.setPosition(cc.p((nickname.width/2) + 5,(lbgame.height) + (nickname.height / 2)));
+            lbgame.setPosition(cc.p((lbgame.width / 2) + 5, (nickname.y - (nickname.height/2) - (lbgame.height/2))));
+
+            cl1.addChild(nickname);
+            cl1.addChild(lbgame);
+            this.lv_chat.pushBackCustomItem(cl1);
+            this.lv_chat.jumpToBottom();
+            if(this.numItemInListChat < 100){
+                this.numItemInListChat = this.numItemInListChat + 1;
+            }else{
+                this.lv_chat.removeItem(0);
             }
         },
 
-        createChat : function(){
-            if(this.pn_chat == null){
+            checkShowChat : function(){
+            if(this.pn_chat == null) {
                 this.showChat = true;
-                this.createSprite(this.pn_taixiu,"pn_chat",cc.p(880 ,155),res_TaiXiu + "bg_chat.png");
-                this.createButton(this.pn_chat,"bt_close_chat",TaiXiuGUI.BTN_CLOSE_CHAT,cc.p(282,370),true,res_SignUp + "b_close.png",res_SignUp + "b_close.png",ccui.Widget.PLIST_TEXTURE);
+               this.EnterModuleChat();
             }else{
                 if(this.showChat == true){
                     this.showChat = false;
                     this.pn_chat.setVisible(false);
+                    this.LeaveModuleChat();
                 }else{
                     this.showChat = true;
                     this.pn_chat.setVisible(true);
+                    this.EnterModuleChat();
                 }
             }
+        },
+
+        EnterModuleChat : function(){
+            getConection(MODULE_CHAT);
+            var url = CmdEnterModule(MODULE_CHAT,userInfo.Info.accessToken);
+            conectsocket.gameClient.send(url);
+        },
+        LeaveModuleChat : function(){
+            getConection(MODULE_CHAT);
+            var url = CmdLeaveModule(MODULE_CHAT);
+            conectsocket.gameClient.send(url);
+        },
+
+        createChat : function(data, error){
+            //cc.log("data chat = " + data);
+            if(error != ""){
+                showAlam(0, error, null);
+                return;
+            }
+            if(this.pn_chat == null) {
+                this.createSprite(this.pn_taixiu, "pn_chat", cc.p(882, 196), res_TaiXiu + "bg_chat.png");
+                this.createButton(this.pn_chat, "bt_close_chat", TaiXiuGUI.BTN_CLOSE_CHAT, cc.p(282, 370), true, res_SignUp + "b_close.png", res_SignUp + "b_close.png", ccui.Widget.PLIST_TEXTURE);
+                this.createListView(this.pn_chat, "lv_chat", cc.p(151, 202), cc.size(290, 288));
+                this.lv_chat.setTouchEnabled(true);
+                this.lv_chat.setBounceEnabled(true);
+                this.lv_chat.setClippingEnabled(true);
+
+                this.createEditBox(this.pn_chat, "ed_chat", cc.p(129, 31), "", "Nhập nội dung chat", fontArial.fontName, 18, cc.size(243, 36), null, cc.TEXT_ALIGNMENT_CENTER, 150);
+                this.ed_chat.setPlaceholderFontColor(cc.color.GRAY);
+                this.ed_chat.setFontColor(cc.color.BLACK);
+
+                this.createButton(this.pn_chat, "bt_send_chat", TaiXiuGUI.BTN_SEND_CHAT, cc.p(279, 31), true, res_TaiXiu + "bt_send.png", res_TaiXiu + "bt_send.png", ccui.Widget.PLIST_TEXTURE);
+                if (!cc.sys.isNative) {
+                    this.ed_chat.setTextAlign(cc.TEXT_ALIGNMENT_LEFT);
+                }
+            }
+            this.fillDataToChatList(data);
+        },
+
+        fillDataToChatList : function(data){
+            this.lv_chat.removeAllChildren();
+            this.lv_chat.removeAllItems();
+
+            for(var i =0; i< data.length; i ++){
+                var txtnick = data[i].a + ":";
+                var nickname = new cc.LabelTTF(txtnick, fontTahomaB.fontName, 15, cc.size(288, 0), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                var mes = data[i].c;
+                var lbgame = new cc.LabelTTF(mes, fontTahoma.fontName, 15, cc.size(288, 0), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+                if(data[i].a.toLowerCase() == "admin"){
+                    nickname.setColor(GuiUtility.color("#ffde00"));
+                    lbgame.setColor(GuiUtility.color("#90ff36"));
+                }else{
+                    nickname.setColor(GuiUtility.color("#ffd200"));
+                    lbgame.setColor(GuiUtility.color("#ffffff"));
+                }
+
+                var cl1 = new ccui.Layout();
+                cl1.height = nickname.height + 5 + lbgame.height;
+                cl1.width = 300;
+                nickname.setPosition(cc.p((nickname.width/2) + 5,(lbgame.height) + (nickname.height / 2)));
+                lbgame.setPosition(cc.p((lbgame.width / 2) + 5, (nickname.y - (nickname.height/2) - (lbgame.height/2))));
+
+                cl1.addChild(nickname);
+                cl1.addChild(lbgame);
+                this.lv_chat.pushBackCustomItem(cl1);
+
+            }
+            this.lv_chat.jumpToBottom();
+            this.numItemInListChat = data.length;
         },
 
         createSoiCau : function(){
@@ -258,6 +375,7 @@ TaiXiuGUI.BTN_CLOSE = 8;
 TaiXiuGUI.BTN_EVENT = 9;
 TaiXiuGUI.BTN_CHAT = 10;
 TaiXiuGUI.BTN_CLOSE_CHAT = 11;
+TaiXiuGUI.BTN_SEND_CHAT = 12
 
 addTaiXiu = function () {
     if (taixiu) return;

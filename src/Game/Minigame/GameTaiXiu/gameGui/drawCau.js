@@ -204,7 +204,7 @@ var DrawCau = BaseLayer.extend(
                 }
             }
             if(dataSoiCauTXLine.length > 115){
-                dataSoiCauTXLine = dataSoiCauTXLine.splice((dataSoiCauTX.length - 115),dataSoiCauTX.length);
+                dataSoiCauTXLine = dataSoiCauTXLine.splice((dataSoiCauTXLine.length - 115),dataSoiCauTXLine.length);
             }
         },
 

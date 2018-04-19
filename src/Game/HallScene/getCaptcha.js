@@ -3,21 +3,28 @@ var Captcha = BaseLayer.extend(
     {
         _posX : null,
         _posY : null,
-        ctor: function (parent, posX, posY) {
+        _captcha : null,
+        ctor: function (parent, posX, posY, captcha) {
             this._super();
             this._posX = posX;
             this._posY = posY;
+            this._captcha = captcha;
             return true;
         },
         customizeGUI: function () {
             cc.log("Captcha");
             this.createSprite(this,"sp_captcha",cc.p(this._posX,this._posY),res_login_scene + "sp_captcha.png");
-            this.getCatpcha();
+            if(this._captcha == "")
+                this.getCatpcha();
+            else{
+                this.showCaptcha(this._captcha, "");
+            }
         },
 
         getCatpcha : function(){
             getConection(MODULE_PORTAL);
-            var url = CmdgetCaptcha();
+            LISTEN_CAPTCHA = TYPE_CAPTCHA.GET;
+            var url = CmdgetCaptcha("0");
             conectsocket.gameClient.send(url);
         },
 
@@ -44,6 +51,7 @@ var Captcha = BaseLayer.extend(
             this.removeAllChildren();
             this.removeFromParent(true)
             captcha_base = null;
+            LISTEN_CAPTCHA = null;
         },
 
         onEnter: function(){

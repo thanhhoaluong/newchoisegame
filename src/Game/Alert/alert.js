@@ -72,8 +72,22 @@ var ShowAlert = BaseLayer.extend(
                     break;
                 case ShowAlert.BTN_REFRESH:
                     break;
+                case ShowAlert.BTN_SEND_CAPTCHA:
+                    this.sendCaptchaCheckOnline();
+                    break;
 
             }
+        },
+
+        sendCaptchaCheckOnline : function(){
+            var captcha = this.ed_captcha_check.getString();
+            if (captcha == "" || captcha == null) {
+                showAlam(0,"Mã xác nhận không chính xác!", null);
+                return;
+            }
+            getConection(MODULE_PORTAL);
+            var url = CmdgetCaptcha(captcha);
+            conectsocket.gameClient.send(url);
         },
 
         destroyAlam : function(){
@@ -108,11 +122,24 @@ var ShowAlert = BaseLayer.extend(
             }
             this.showBackground();
         },
+        designCaptcha : function(kind, content, captcha){
+            this.lb_content.setString(content);
+            this._kind = kind;
+            this.bt_ok.setVisible(false);
+            this.bt_cancel.setVisible(false);
+            this.bt_close.setVisible(false);
+            this.pn_check_captcha.setVisible(true);
+            this.addCaptchaAlert(captcha);
+            this.showBackground();
+        },
 
-        addCaptchaAlert : function (){
+
+        addCaptchaAlert : function (captcha){
             if(captcha_base == null){
-                captcha_base = new Captcha(this, 650, 333);
+                captcha_base = new Captcha(this, 650, 333, captcha);
                 this.pn_check_captcha.addChild(captcha_base);
+            }else{
+                captcha_base.showCaptcha(captcha, "");
             }
         },
 
@@ -133,6 +160,12 @@ showAlam = function (kind, content, callbackOK) {
             callback = callbackOK;
        showalam.designAlam(kind, content, callback);
    }
+};
+
+showCaptcha = function (kind, content, captcha) {
+    if(showalam != null){
+        showalam.designCaptcha(kind, content, captcha);
+    }
 };
 
 ShowAlert.CLOSE = 1;

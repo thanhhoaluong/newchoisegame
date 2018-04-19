@@ -18,7 +18,7 @@ var HallScene = BaseLayer.extend(
 
             this.createButton(this.top_menu,"bt_sign_out",HallScene.BTN_SIGN_OUT,cc.p(107,posy),true,res_MenuSetting + "signout.png",res_MenuSetting + "signout.png",ccui.Widget.PLIST_TEXTURE);
             this.createImage(this.top_menu, "bg_player", cc.p(280, posy), res_MenuSetting + "Top/bg_profile.png", cc.size(207, 56));
-            this.createText(this.top_menu, "lb_nickname", cc.p(305, posy), "dell salah", fontTahoma.fontName, 20);
+            this.createText(this.top_menu, "lb_nickname", cc.p(305, posy), userInfo.Info.nickname, fontTahoma.fontName, 20);
             this.lb_nickname.ignoreContentAdaptWithSize(false);
             this.lb_nickname.setContentSize(cc.size(150, 30));
             this.lb_nickname.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);

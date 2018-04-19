@@ -75,6 +75,7 @@ var LoginScene = BaseLayer.extend(
             this.createImage(this.SignIn, "sp_pass_sign", cc.p(810, 678), res_login_scene + "bg_pass.png", cc.size(184, 41));
             this.createEditBox(this.SignIn,"ed_username_sign",cc.p(590,678),"","Tên tài khoản",fontArial.fontName,18,cc.size(174,41),null,cc.TEXT_ALIGNMENT_CENTER,16);
             this.createEditBox(this.SignIn,"ed_pass_sign",cc.p(810,678),"","Mật khẩu",fontArial.fontName,18,cc.size(174,41),null,cc.TEXT_ALIGNMENT_CENTER,16);
+            this.ed_pass_sign.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
 
             if (!cc.sys.isNative) {
                 this.ed_username_sign.setTextAlign(cc.TEXT_ALIGNMENT_CENTER);

@@ -34,11 +34,13 @@ var SignUp = BaseLayer.extend(
             this.createEditBox(this.SignUp,"ed_pass_reg",cc.p(745,396),"","Mật khẩu",fontArial.fontName,22,cc.size(280,56),null,cc.TEXT_ALIGNMENT_CENTER,16);
             this.ed_pass_reg.setPlaceholderFontColor(cc.color.GRAY);
             this.ed_pass_reg.setFontColor(cc.color.BLACK);
+            this.ed_pass_reg.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
 
             this.createImage(this.SignUp, "sp_re_pass_reg", cc.p(745,337), res_login_scene + "bg_edit.png", cc.size(301, 56));
             this.createEditBox(this.SignUp,"ed_re_pass_reg",cc.p(745,337),"","Nhập lại mật khẩu",fontArial.fontName,22,cc.size(280,56),null,cc.TEXT_ALIGNMENT_CENTER,16);
             this.ed_re_pass_reg.setPlaceholderFontColor(cc.color.GRAY);
             this.ed_re_pass_reg.setFontColor(cc.color.BLACK);
+            this.ed_re_pass_reg.setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD);
 
             this.createImage(this.SignUp, "sp_captcha", cc.p(679,278), res_login_scene + "bg_edit_s.png", cc.size(167, 56));
             this.createEditBox(this.SignUp,"ed_captcha",cc.p(679,278),"","Nhập mã",fontArial.fontName,22,cc.size(147,56),null,cc.TEXT_ALIGNMENT_CENTER,6);
@@ -82,7 +84,7 @@ var SignUp = BaseLayer.extend(
 
         addSceneCaptcha : function(){
             if(captcha_base == null){
-                captcha_base = new Captcha(this, 850, 278);
+                captcha_base = new Captcha(this, 850, 278, "");
                 this.SignUp.addChild(captcha_base);
             }
         },
@@ -136,7 +138,7 @@ var SignUp = BaseLayer.extend(
                 return;
             }
             getConection(MODULE_PORTAL);
-            var url = CmdSendRegister(username, password, captcha , loginscene.platform);
+            var url = CmdSendRegister(username,nickname, password, captcha , loginscene.platform);
             conectsocket.gameClient.send(url);
         },
 
@@ -160,6 +162,7 @@ var SignUp = BaseLayer.extend(
             userInfo.Info.accessToken = info.Token;
             userInfo.Info.zoMoney = info.Coin;
             userInfo.Info.xuMoney = info.Gold;
+            userInfo._isSignIned = true;
 
 
             intoHallScene();
