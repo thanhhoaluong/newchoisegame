@@ -1,4 +1,4 @@
-var DrawCau = ToolTipBaseLayer.extend(
+var DrawCauTable = ToolTipBaseLayer.extend(
     {
         ctor: function () {
             this._super();
@@ -7,7 +7,6 @@ var DrawCau = ToolTipBaseLayer.extend(
             this.max_column = 23;
             this.arrTableSC = [];
             this.arrLineSC = [];
-            this.save_stt = 0;
             this.myPage = 1;
             return true;
         },
@@ -53,7 +52,7 @@ var DrawCau = ToolTipBaseLayer.extend(
             }
 
             /// fix du lieu
-            for(var i = 0; i < 50; i ++){
+            for(var i = 0; i < 150; i ++){
                 var detoh = null;
                 if(getRandomInt(0,1) == 0)
                     detoh = dataDetailSoiCauTai;
@@ -83,8 +82,7 @@ var DrawCau = ToolTipBaseLayer.extend(
             this.lb_cau_xiu_1.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
             this.createSprite(this.pn_soicau,"table_sc",cc.p(418 ,390),res_TaiXiu + "table_sc.png");
-            this.createSprite(this.pn_soicau,"line_sc",cc.p(418 ,132),res_TaiXiu + "line_sc.png");
-            this.createLayout(this.pn_soicau,"dataTableSC",cc.p(418,315),null,cc.size(759,479),false);
+            this.createLayout(this.pn_soicau,"dataTableSC",cc.p(418,390),null,cc.size(759,199),false);
             this.dataTableSC.setClippingEnabled(false);
 
             this.createSprite(this.dataTableSC,"pn_tooltip_Tb",cc.p(0 ,-25),res_TaiXiu + "bg_tooltip.png");
@@ -112,14 +110,28 @@ var DrawCau = ToolTipBaseLayer.extend(
             this.lb_cau_xiu_2.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
             this.lb_cau_xiu_2.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
 
+            this.createSprite(this.pn_soicau,"line_sc",cc.p(418 ,132),res_TaiXiu + "line_sc.png");
+            this.createLayout(this.pn_soicau,"dataLineSC",cc.p(412,132),null,cc.size(751,190),false);
+            this.dataLineSC.setClippingEnabled(false);
+
+            this.createSprite(this.dataLineSC,"pn_tooltip_Li",cc.p(0 ,-25),res_TaiXiu + "bg_tooltip.png");
+            this.createText(this.pn_tooltip_Li, "lb_tooltip_Li", cc.p(this.pn_tooltip_Tb.width/2, 24), "1000\n123123", fontTahoma.fontName, 16);
+            this.lb_tooltip_Li.ignoreContentAdaptWithSize(false);
+            this.lb_tooltip_Li.setName("lb_tooltip");
+            this.lb_tooltip_Li.setContentSize(cc.size(170, 40));
+            this.lb_tooltip_Li.setTextVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+            this.lb_tooltip_Li.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER);
+            this.pn_tooltip_Li.setLocalZOrder(200);
+            this.pn_tooltip_Li.setVisible(false);
+
             TaiXiuLogic.soicau = new TaiXiuLogic.SoiCau();
             TaiXiuLogic.soicau.checkDataTableSoiCau();
         },
 
         drawTableSoiCau : function(){
-            var bdY = 397;
+            var bdY = 182;
             var posX = 17;
-            var posY = 397;
+            var posY = 182;
             var num_inColumn = 1;
             var totalColum = 1;
             var arrEachColumn = [];
@@ -168,7 +180,7 @@ var DrawCau = ToolTipBaseLayer.extend(
                 this.createSprite(this.dataTableSC,"sc_" + i,cc.p(posX ,posY),res_TaiXiu + str + ".png");
                 this.createText(this["sc_" + i], "tx_" + i, cc.p(this["sc_" + i].width/2, this["sc_" + i].height/2), dataSoiCauTX[i].result, fontTahoma.fontName, 17);
                 this["tx_" + i].setColor(col);
-                this["sc_" + i].setName(this.save_stt);
+                this["sc_" + i].setName(i);
                 this.arrTableSC.push(this["sc_" + i]);
                 if(i != (dataSoiCauTX.length - 1)){
                     if(dataSoiCauTX[i + 1].result == dataSoiCauTX[i].result){
@@ -192,16 +204,16 @@ var DrawCau = ToolTipBaseLayer.extend(
                 }else{
                     arrEachColumn.push(num_inColumn);
                 }
-                this.save_stt++;
             }
 
             this.drawLineSoiCau();
+            this.addToolTipTable(this.dataTableSC, this.arrTableSC, dataSoiCauTX, this.pn_tooltip_Tb);
         },
 
         drawLineSoiCau : function(){
             var bdX = 17;
             var posX = 17;
-            var posY = -20;
+            var posY = 20;
             var gtX = 32.8;
 
             if(dataSoiCauTXLine.length > 115){
@@ -217,11 +229,11 @@ var DrawCau = ToolTipBaseLayer.extend(
                     str = "sc_x";
                     col = cc.color.BLACK;
                 }
-                this.createSprite(this.dataTableSC,"sc_" + i,cc.p(posX ,posY),res_TaiXiu + str + ".png");
+                this.createSprite(this.dataLineSC,"sc_" + i,cc.p(posX ,posY),res_TaiXiu + str + ".png");
                 this.createText(this["sc_" + i], "tx_" + i, cc.p(this["sc_" + i].width/2, this["sc_" + i].height/2), dataSoiCauTXLine[i].result, fontTahoma.fontName, 17);
                 this["tx_" + i].setColor(col);
-                this["sc_" + i].setName(this.save_stt);
-                this.arrTableSC.push(this["sc_" + i]);
+                this["sc_" + i].setName(i);
+                this.arrLineSC.push(this["sc_" + i]);
 
                 if(i != (dataSoiCauTX.length - 1)){
                     posY = posY;
@@ -236,10 +248,8 @@ var DrawCau = ToolTipBaseLayer.extend(
                         posY = posY + 38
                     }
                 }
-                this.save_stt++
             }
-            var arrAllData = dataSoiCauTX.concat(dataSoiCauTXLine);
-            this.addToolTipTable(this.dataTableSC, this.arrTableSC, arrAllData, this.pn_tooltip_Tb);
+            this.addToolTipLine(this.dataLineSC, this.arrLineSC, dataSoiCauTXLine, this.pn_tooltip_Li);
         },
 
         createLayoutThongKe : function(){

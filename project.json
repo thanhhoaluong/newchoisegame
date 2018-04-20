@@ -50,6 +50,7 @@
     "src/Components/TableLayer/DataViewFrame.js",
     "src/Components/TableLayer/TabViewFrame.js",
     "src/Components/TableLayer/OtherTabViewFrame.js",
+    "src/Components/ToolTipBaseLayer.js",
 
     "src/Game/common/GameManager.js",
     "src/Game/Network/ListenClient.js",

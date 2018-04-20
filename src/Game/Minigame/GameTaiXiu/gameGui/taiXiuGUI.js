@@ -124,7 +124,7 @@ var TaiXiuGUI = MiniGameLayer.extend(
             var posx = 14;
             for(var i = 0; i < TaiXiuGUI.arrHistory.length; i ++){
                 var str = "";
-                if(TaiXiuGUI.arrHistory[i].result == TaiXiuGUI.TAI)
+                if(TaiXiuGUI.arrHistory[i].result >= 11)
                     str = "rs_tai";
                 else
                     str = "rs_xiu";
@@ -168,10 +168,10 @@ var TaiXiuGUI = MiniGameLayer.extend(
 
         showToolTip : function(str){
             var subtext = TaiXiuGUI.arrHistory[str].id +"\n";
-            if(TaiXiuGUI.arrHistory[str].result == centerRing.TAI)
-                subtext = subtext + "Tài ";
+            if(TaiXiuGUI.arrHistory[str].result >= 11)
+                subtext = subtext + "TÀI ";
             else
-                subtext = subtext + "Xỉu "
+                subtext = subtext + "XỈU "
 
             subtext = subtext + "(" + TaiXiuGUI.arrHistory[str].xucxac1 + "," + TaiXiuGUI.arrHistory[str].xucxac2 + "," + TaiXiuGUI.arrHistory[str].xucxac3 + ")";
             this.lb_tooltip.setString(subtext);
@@ -359,7 +359,7 @@ var TaiXiuGUI = MiniGameLayer.extend(
 TaiXiuGUI.arrHistory = [];
 TaiXiuGUI.detailHis = {
     id : "#123456",
-    result : centerRing.TAI,
+    result : 13,
     xucxac1 : 1,
     xucxac2 : 6,
     xucxac3 : 6,
