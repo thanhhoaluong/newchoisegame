@@ -4,11 +4,22 @@ var DrawCau = ToolTipBaseLayer.extend(
             this._super();
             this.pn_soicau = null;
             this.pn_thongke = null;
+            this.is_create_thongke = false;
             this.max_column = 23;
             this.arrTableSC = [];
             this.arrLineSC = [];
+
+            this.arrTable = []; /// ben ve duong line
+            this.arrTableLineColor = [];
+
             this.save_stt = 0;
             this.myPage = 1;
+
+            this.lineTotal = null;
+            this.lineXX1 = null;
+            this.lineXX2 = null;
+            this.lineXX3 = null;
+
             return true;
         },
         customizeGUI: function () {
@@ -36,6 +47,7 @@ var DrawCau = ToolTipBaseLayer.extend(
             this.list_soicau.setBounceEnabled(true);
             this.list_soicau.setClippingEnabled(true);
             this.list_soicau.setDirection(ccui.ScrollView.DIR_HORIZONTAL);
+
             for(var i = 0; i < 2; i ++){
                 var celllist = new ccui.Layout();
                 celllist.height = this.list_soicau.height;
@@ -48,9 +60,11 @@ var DrawCau = ToolTipBaseLayer.extend(
                 }else {
                     celllist.setBackGroundColor(GuiUtility.color("#354000"));
                     this.pn_thongke = celllist;
+                    celllist.setBackGroundColorOpacity(0);
                 }
                 this.list_soicau.pushBackCustomItem(celllist);
             }
+
 
             /// fix du lieu
             for(var i = 0; i < 50; i ++){
@@ -62,7 +76,7 @@ var DrawCau = ToolTipBaseLayer.extend(
                 dataSoiCauTX.push(detoh);
                 dataSoiCauTXLine.push(detoh);
             }
-
+            ////
             this.createLayoutSoiCau();
         },
 
@@ -243,10 +257,95 @@ var DrawCau = ToolTipBaseLayer.extend(
         },
 
         createLayoutThongKe : function(){
-            this.createLayout(this,"pn_thongke",cc.p(640,370),null,cc.size(835, 545),false);
+            if(this.is_create_thongke == true)
+                return;
+            var arrTB1 = [18,15,12,9,6,3];
+            var arrTB2 = [6,5,4,3,2,1];
+            this.createSprite(this.pn_thongke,"table_1",cc.p(418 ,380),res_TaiXiu + "table_sc.png");
+            this.createSprite(this.pn_thongke,"table_2",cc.p(418 ,140),res_TaiXiu + "table_sc.png");
+
+            for(var i =0; i < arrTB1.length; i++){
+                this.createText(this.pn_thongke, "lb_" + i, cc.p(15, 478 - i*32.5), arrTB1[i], fontTahoma.fontName, 20);
+                this["lb_" + i].setColor(color_zo);
+            }
+            for(var i =0; i < arrTB2.length; i++){
+                this.createText(this.pn_thongke, "lb_" + i, cc.p(15, 238 - i*32.5), arrTB2[i], fontTahoma.fontName, 20);
+                this["lb_" + i].setColor(color_zo);
+            }
+            this.createLayout(this.pn_thongke,"dataTable",cc.p(418,255),null,cc.size(759,479),false);
+            //// xu ly data
+            dataSoiCauDetail = dataSoiCauTXLine.splice((dataSoiCauTXLine.length - 23),dataSoiCauTXLine.length);
+            var posX = 0;
+            var docao = 7*32.5;
+            for(var i =0; i < dataSoiCauDetail.length; i++){
+                var docaoY = dataSoiCauDetail[i].result * docao/18;
+                var str = "";
+                var col = null;
+                if (dataSoiCauDetail[i].result >= 11){
+                    str = "sc_t";
+                    col = cc.color.WHITE;
+                }else{
+                    str = "sc_x";
+                    col = cc.color.BLACK;
+                }
+                this.createSprite(this.dataTable,"sc_" + i,cc.p(posX ,(478 - docao) + docaoY),res_TaiXiu + str + ".png");
+                this.createText(this["sc_" + i], "tx_" + i, cc.p(this["sc_" + i].width/2, this["sc_" + i].height/2), dataSoiCauDetail[i].result, fontTahoma.fontName, 17);
+                this["tx_" + i].setColor(col);
+                this.arrTable.push(this["sc_" + i]);
+                posX = posX + 32.9;
+            }
+            this.lineTotal = new cc.DrawNode();
+            this.dataTable.addChild(this.lineTotal);
+
+            for(var i =0; i < this.arrTable.length; i++){
+                if(i < this.arrTable.length - 1) {
+                    this.lineTotal.drawSegment(cc.p(this.arrTable[i].getPositionX(), this.arrTable[i].getPositionY()), cc.p(this.arrTable[i + 1].getPositionX(), this.arrTable[i + 1].getPositionY()), 1.5, colorLineT);
+                    this.lineTotal.setLocalZOrder(-1);
+                }
+            }
+            /// ve color mau
+            this.lineXX1 = new cc.DrawNode();
+            this.dataTable.addChild(this.lineXX1);
+
+            this.lineXX2 = new cc.DrawNode();
+            this.dataTable.addChild(this.lineXX2);
+
+            this.lineXX3 = new cc.DrawNode();
+            this.dataTable.addChild(this.lineXX3);
+            var posX = 0;
+            docao = 6*32.9;
+            for(var i =0; i < dataSoiCauDetail.length; i++){
+                var docaoX1 = dataSoiCauDetail[i].xucxac1 * docao/6;
+                var posY1 = (222 - docao) + docaoX1;
+                this.lineXX1.drawDot(cc.p(posX, posY1), 10, colorLine1);
+                if(i < dataSoiCauDetail.length - 1){
+                    var docaoX1_2 = dataSoiCauDetail[i + 1].xucxac1 * docao/6;
+                    var posY1_2 = (222 - docao) + docaoX1_2;
+                    this.lineXX1.drawSegment(cc.p(posX, posY1), cc.p(posX + 33, posY1_2), 1.5, colorLine1);
+                }
+
+                var docaoX2 = dataSoiCauDetail[i].xucxac2 * docao/6;
+                var posY2 = (222 - docao) + docaoX2;
+                this.lineXX2.drawDot(cc.p(posX, posY2), 9, colorLine2);
+                if(i < dataSoiCauDetail.length - 1){
+                    var docaoX2_2 = dataSoiCauDetail[i + 1].xucxac2 * docao/6;
+                    var posY2_2 = (222 - docao) + docaoX2_2;
+                    this.lineXX1.drawSegment(cc.p(posX, posY2), cc.p(posX + 33, posY2_2), 1.5, colorLine2);
+                }
+
+                var docaoX3 = dataSoiCauDetail[i].xucxac3 * docao/6;
+                var posY3 = (222 - docao) + docaoX3;
+                this.lineXX3.drawDot(cc.p(posX, posY3), 8, colorLine3);
+                if(i < dataSoiCauDetail.length - 1){
+                    var docaoX3_2 = dataSoiCauDetail[i + 1].xucxac3 * docao/6;
+                    var posY3_2 = (222 - docao) + docaoX3_2;
+                    this.lineXX1.drawSegment(cc.p(posX, posY3), cc.p(posX + 33, posY3_2), 1.5, colorLine3);
+                }
+                posX = posX + 33;
+            }
 
 
-            return this.pn_thongke;
+            this.is_create_thongke = true;
         },
 
         onButtonRelease: function (button, id) {
@@ -270,6 +369,7 @@ var DrawCau = ToolTipBaseLayer.extend(
                 this.bt_back.setEnabled(false);
                 this.bt_back.setBright(false);
                 this.myPage = 1;
+                cc.eventManager.resumeTarget(this.dataTableSC, true);
 
             }else{ // next
                 this.bt_next.setEnabled(false);
@@ -277,6 +377,8 @@ var DrawCau = ToolTipBaseLayer.extend(
                 this.bt_back.setEnabled(true);
                 this.bt_back.setBright(true);
                 this.myPage = 2;
+                this.createLayoutThongKe();
+                cc.eventManager.pauseTarget(this.dataTableSC, true);
             }
             this.list_soicau.scrollToItem(this.myPage - 1, cc.p(0.5, 0.5), cc.p(0.5, 0.5), 0.5);
         },
